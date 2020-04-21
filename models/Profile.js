@@ -12,10 +12,25 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
-  savedVids: {
-    type: Schema.Types.ObjectId,
-    ref: "videos"
-  }
+  savedVids: [
+    {
+      title: {
+        type: String
+      },
+      vidLink: {
+        type: String
+      },
+      category: {
+        type: String
+      },
+      categoryTag: {
+        type: String
+      },
+      thumbnail: {
+        type: String
+      }
+    }
+  ]
 });
 
 module.exports = Profile = mongoose.model("profile", ProfileSchema);

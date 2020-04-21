@@ -15,7 +15,7 @@ const VideosSchema = new schema({
   categoryTag: {
     type: String
   },
-  thumbNail: {
+  thumbnail: {
     type: String
   }
 });
