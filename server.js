@@ -1,9 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const passport = require("passport");
+
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
+const videos = require("./routes/api/videos");
 
 const app = express();
+
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // db config
 const db = require("./config/keys").mongoURI;
@@ -17,13 +25,16 @@ mongoose
   .then(() => console.log("MongoDb connected"))
   .catch(err => console.log(err));
 
-app.get("/", (req, res) => {
-  res.send("THIS SONGS ABOUT YOUR FUCKING MOTHER");
-});
+// Passport Middleware
+app.use(passport.initialize());
+
+// Passport Config
+require("./config/passport")(passport);
 
 // Use routes
 app.use("/api/users", users);
 app.use("/api/profile", profile);
+app.use("/api/videos", videos);
 
 const port = process.env.PORT || 5000;
 
