@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // Create Videos Schema
-const VideosSchema = new schema({
+const VideosSchema = new Schema({
   title: {
     type: String
   },
@@ -17,7 +17,15 @@ const VideosSchema = new schema({
   },
   thumbnail: {
     type: String
-  }
+  },
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      }
+    }
+  ]
 });
 
 module.exports = Videos = mongoose.model("videos", VideosSchema);

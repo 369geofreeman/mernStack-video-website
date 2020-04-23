@@ -191,6 +191,25 @@ router.delete(
   }
 );
 
+// @route  GET api/profile/savedVids
+// @desc  get all videos
+// @access public
+router.get(
+  "/savedVids",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        res.json(profile.savedVids);
+        // .find()
+        // // .sort({ date: -1 })
+        // .then(vids => res.json(vids))
+        // .catch(err => res.status(404));
+      })
+      .catch(err => res.status(404));
+  }
+);
+
 // @route  DELETE api/profile
 // @desc  delete user and profile
 // @access private
