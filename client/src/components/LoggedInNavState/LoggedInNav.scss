@@ -1,0 +1,54 @@
+.loggedInOuterContainer{
+  display: flex;
+  align-items: center;
+  margin-right: 1.5em
+}
+
+.LoggedInIconContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 1.5em;
+  transition: all 0.2s ease-in-out;
+}
+.clippedHeart {
+  width: 3em;
+  height: 3em;
+  margin-right: 0.8em;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+.clippedHeart:hover {
+  transform: scale(1.15)
+}
+.clippedHeart::after{
+  transform: scale(0.5);
+}
+
+.clippedHeartLiked{
+  width: 3em;
+  height: 3em;
+  margin-right: 0.8em;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+.clippedHeartLiked:hover{
+  transform: scale(1.15)
+}
+.clippedHeartLiked::after{
+  transform: scale(2)
+}
+
+.collectionIcon {
+  width: 3em;
+  height: 3em;
+  margin-right: 0.8em;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
+}
+.collectionIcon:hover {
+  transform: scaleX(0.8)
+}
+.collectionIcon::after{
+  transform: scaleX(1)
+}

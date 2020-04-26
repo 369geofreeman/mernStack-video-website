@@ -1,0 +1,57 @@
+.registerModalBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+.registerModalContainer {
+  position: absolute;
+  background: "#fff";
+  top: -20em;
+  left: 28%;
+  background-color: #fff;
+  z-index: 101;
+  transform: translateY(25em);
+  transition: all 0.3s ease-in-out;
+  border-bottom: 2em solid rgb(250, 60, 26);
+  padding-bottom: 1em;
+}
+
+.registerWelcomeText {
+  text-align: center;
+  font-size: 3em;
+  margin: 0.8em 0;
+  color: rgb(250, 60, 26);
+}
+.registerModalBodyContainer {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+// FORMBTN
+.formBtnContainer {
+  width: 100%;
+  background-color: rgb(250, 60, 26);
+  margin-top: 0.5em;
+}
+.formBtnContainer:hover {
+  background-color: tomato;
+}
+.submitBtn {
+  padding: 1em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+}
+.submitBtn:focus {
+  outline-width: 0;
+}

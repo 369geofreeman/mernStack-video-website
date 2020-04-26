@@ -1,0 +1,138 @@
+.accountSettingsContainer {
+  text-align: center;
+  margin: 3em 40em 5em 15em;
+  padding: 50px;
+  background-color: #000;
+  -webkit-animation: fadein 0.8s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 0.8s; /* Firefox < 16 */
+  -ms-animation: fadein 0.8s; /* Internet Explorer */
+  -o-animation: fadein 0.8s; /* Opera < 12.1 */
+  animation: fadein 0.8s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.AccountHeaderImg {
+  width: 3em;
+  height: 3em;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.accountUserEmail { 
+  font-size: 2.5em; 
+  color: white; 
+  // text-align: 
+  margin-bottom: 1em
+}
+
+.acountTitle {
+  margin: 1em 0;
+}
+.accountFormChangeTitleContainer{
+  display: flex;
+  justify-content: space-between
+}
+.accountFormChangeTitleClose {
+  color: white;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.accountTitleContainer{
+  display: flex;
+  justify-content: flex-start;
+}
+.accountSavedVidsText{
+  color: #f2f2f2;
+  font-size: 1em;
+  margin: 0.5em 1em 0.5em 0;
+}
+.accountSavedVidsTextRes{
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0.5em 1em 0.5em 0;
+}
+
+.accountChangeCredentualsContainer{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+.accountChangeBtn{
+  background-color: rgb(253, 13, 233);;
+  font-size: 1.5em;
+  color: white;
+  padding: 7px 10px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+  border-radius: 10px;
+}
+.accountChangeBtn:hover{
+  transform: scaleX(1.1);
+  background-color: darkmagenta;
+}
+.accountChangeBtn::after{
+  transform: scale(1);
+  background-color: rgb(253, 13, 233);
+}
+.accountChangeBtn:focus {
+  outline:none;
+  box-shadow: none;
+}
+.accountFormChangeTitle{
+ color: rgb(245, 49, 65);;
+  font-weight: 600
+}
+
+.accountPasswordFormContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.accountPasswordFormInput {
+  outline:none;
+  width: 100%;
+  margin: 1em 0;
+  padding: 1em;
+  color: #222
+}
+.accountPasswordFormInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #333;
+  opacity: 1; /* Firefox */
+}

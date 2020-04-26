@@ -1,0 +1,36 @@
+.sideMenuContainer {
+  position: fixed;
+  box-sizing: border-box;
+}
+.sideMenuTitles {
+  text-decoration: none;
+  list-style: none;
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-transition: color 0.5s ease;
+  -moz-transition: color 0.5s ease;
+  -o-transition: color 0.5s ease;
+  -ms-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+  padding-bottom: 5px;
+  transition: transform 200ms ease-in-out;
+}
+.sideMenuTitles::after{
+  display: block;
+  content: "";
+  border-bottom: solid 3px red;
+  margin: 15px 75px 15px 0;
+  padding-bottom: 5px;
+  transform: scaleX(0);
+  transition: transform 150ms ease-in-out;
+}
+.sideMenuTitles:hover {
+  // color: rgb(240, 193, 193);
+  transform: scale(1.1)
+}
+.sideMenuTitles:hover:after {
+  transform: scaleX(1);
+  // color: #fa516a
+}

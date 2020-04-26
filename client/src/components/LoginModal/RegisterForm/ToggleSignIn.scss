@@ -1,0 +1,25 @@
+.toggleSignInContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.toggleSignInBtns {
+  padding: 5% 10%;
+  margin-right: 5%;
+  background-color: rgb(250, 60, 26);
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.toggleSignInBtns:hover{
+  background-color: tomato
+}
+.toggleSignInBtnsAfter {
+  padding: 5% 10%;
+  margin-right: 5%;
+  background-color: tomato;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}

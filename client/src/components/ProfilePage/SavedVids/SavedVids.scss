@@ -1,0 +1,116 @@
+.userSavedVidsContainer {
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #000;
+  -webkit-animation: fadein 0.8s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 0.8s; /* Firefox < 16 */
+  -ms-animation: fadein 0.8s; /* Internet Explorer */
+  -o-animation: fadein 0.8s; /* Opera < 12.1 */
+  animation: fadein 0.8s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.profileThumbNail {
+  width: 17em;
+  height: 10em;
+  margin: 1em 1em 0 1em;  
+  vertical-align: middle;
+}
+.profileThumbNail:hover {
+  transition: 100ms ease-in-out;
+  transform: scale(1.025)
+}
+.userSavedVidTitle {
+  width: 18em;
+  color: #fff;
+  font-size: 0.75em;
+  margin: 3% 5%
+}
+
+// NoSavedVidsMessage
+.noSavedVidsContainer{
+  flex: 1;
+  // height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 10em 15em 0 0;
+  padding: 50px;
+}
+.noSavedVidsImage {
+  width: 5em;
+  height: 5em;
+}
+.noSavedVidstitle{
+  color: white;
+  font-size: 2em;
+  text-align: center;
+  padding: 10px 0;
+}
+.noSavedVidsbodyText {
+  color: white;
+  font-size: 1em;
+  text-align: center;
+  font-weight: 300;
+}
+.noSavedVidsBtnToHottestContainer {
+  transition: 250ms ease-in-out;
+  margin: 2em;
+}
+.noSavedVidsBtnToHottestContainer:hover{
+  transform: scaleX(1.1);
+}
+.noSavedVidsBtnToHottestContainer::after{
+  transform: scaleX(1);
+}
+.noSavedVidsBtnToHottest{
+  text-decoration: none;
+  background-color: rgb(253, 13, 233);
+  color: white;
+  text-align: center;
+  padding: 0.7em 1em;
+  border-radius: 10px;
+  transition: 250ms ease-in-out;
+}
+.noSavedVidsBtnToHottest:hover{
+  background-color: darkmagenta
+}
+.noSavedVidsBtnToHottest::after{
+  transform: scaleY(1)
+}

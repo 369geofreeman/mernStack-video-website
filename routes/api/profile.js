@@ -1,228 +1,210 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
-const passport = require("passport");
-mongoose.set("useFindAndModify", false);
+const { check, validationResult } = require("express-validator");
+const auth = require("../../middleware/auth");
 
-// Load validation
-const validateProfileInput = require("../../validation/profile");
-const validateSavedVidsInput = require("../../validation/savedVids");
-// Load Profile modal
 const Profile = require("../../models/Profile");
-// Load User modal
 const User = require("../../models/User");
 
-// @route  GET api/profile
-// @desc  get current users profile
-// @access private
-router.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    let errors = {};
-
-    Profile.findOne({ user: req.user.id })
-      .populate("user", ["name"])
-      .then(profile => {
-        if (!profile) {
-          errors.noProfile = "There is no profile for this user";
-          return res.status(404).json(errors);
-        }
-        res.json(profile);
-      })
-      .catch(err => res.status(404).json(err));
-  }
-);
-
-// @route  GET api/profile/all
-// @desc  Get all profiles
-// @access Public
-router.get("/all", (req, res) => {
-  const errors = {};
-  Profile.find()
-    .populate(" user", ["name", "avatar"])
-    .then(profiles => {
-      if (!profiles) {
-        errors.noProfile = "There are no profiles";
-        return res.status(404).json(errors);
-      }
-      res.json(profiles);
-    })
-    .catch(err => res.status(404).json({ profile: "There is no profiles" }));
-});
-
-// @route  GET api/profile/handle/:handle
-// @desc  Get profile by profile
-// @access Public
-router.get("/handle/:handle", (req, res) => {
-  const errors = {};
-
-  Profile.findOne({ handle: req.params.handle })
-    .populate("user", ["name"])
-    .then(profile => {
-      if (!profile) {
-        errors.noprofile = "There is no profile for this user";
-        res.status(404).json(errors);
-      }
-      res.json(profile);
-    })
-    .catch(err => res.status(404).json(err));
-});
-
-// @route  GET api/profile/user/:user_id
-// @desc  Get profile by user ID
-// @access Public
-router.get("/user/:user_id", (req, res) => {
-  const errors = {};
-
-  Profile.findOne({ user: req.params.user_id })
-    .populate("user", ["name"])
-    .then(profile => {
-      if (!profile) {
-        errors.noprofile = "There is no profile for this user";
-        res.status(404).json(errors);
-      }
-      res.json(profile);
-    })
-    .catch(err =>
-      res.status(404).json({ profile: "There is no profile for this user" })
-    );
-});
-
-// @route  POST api/profile
-// @desc  Create or edit user profile
-// @access private
-// Maybe use this to update name email and password?
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateProfileInput(req.body);
-
-    // Check Validation
-    if (!isValid) {
-      // Return any errors with 400 status
-      return res.status(400).json(errors);
-    }
-
-    //  get fields
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.savedVids) profileFields.savedVids = req.body.savedVids;
-
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      if (profile) {
-        // Update
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        ).then(profile => res.json(profile));
-      } else {
-        // Create
-
-        // Check handle exists
-        Profile.findOne({ handle: profileFields.handle }).then(profile => {
-          if (profile) {
-            errors.handle = "That handle already exists";
-            res.status(400).json(errors);
-          }
-          // Save profile
-          new Profile(profileFields).save().then(profile => res.json(profile));
-        });
-      }
+// @route    GET api/profile/me
+// @desc     Get current users profile
+// @access   Private
+router.get("/me", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
     });
-  }
-);
 
-// @route  POST api/profile/savedVids
-// @desc  Add savedVids to profile
-// @access private
-router.post(
-  "/savedVids",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateSavedVidsInput(req.body);
-
-    // Check Validation
-    if (!isValid) {
-      // Return any errors with 400 status
-      return res.status(400).json(errors);
+    if (!profile) {
+      return res.status(400).json({ msg: "There is no profile for this user" });
     }
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      const newVid = {
-        title: req.body.title,
-        vidLink: req.body.vidLink,
-        category: req.body.category,
-        categoryTag: req.body.categoryTag,
-        thumbnail: req.body.thumbnail
-      };
 
-      // Add to SavedVids array
+    // only populate from user document if profile exists
+    res.json(profile.populate("user", ["name"]));
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    POST api/profile
+// @desc     Create or update user profile
+// @access   Private
+
+router.post("/", auth, async (req, res) => {
+  const { savedVids } = req.body;
+
+  // Build Profile obj
+  const profileFields = {};
+  profileFields.user = req.user.id;
+  if (savedVids) profileFields.savedVids = savedVids;
+
+  try {
+    let profile = await Profile.findOne({ user: req.user.id });
+
+    if (profile) {
+      // Update
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      );
+
+      return res.json(profile);
+    }
+
+    // create
+    profile = new Profile(profileFields);
+
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    GET api/profile
+// @desc     get all profiles
+// @access   Private
+router.get("/", async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate("user", ["name"]);
+    res.json(profiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    GET api/profile/user/:user_id
+// @desc     Get profile by user ID
+// @access   Public
+router.get("/user/:user_id", async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.user_id
+    }).populate("user", ["name"]);
+
+    if (!profile) return res.status(400).json({ msg: "Profile not found" });
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    DELETE api/profile
+// @desc     Delete user profile and post
+// @access   Private
+router.delete("/", auth, async (req, res) => {
+  try {
+    // Remove profile
+    await Profile.findOneAndRemove({ user: req.user.id });
+    // Remove user
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    res.json({ msg: "User removed" });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    PUT api/profile/savevid
+// @desc     Add saved video
+// @access   Private
+router.put(
+  "/savevid",
+  [
+    auth,
+    [
+      check("vidLink", "Video link is required")
+        .not()
+        .isEmpty()
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { title, vidLink, category, categoryTag } = req.body;
+
+    const newVid = {
+      title,
+      vidLink,
+      category,
+      categoryTag
+    };
+
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+
+      // Check to see if video already saved by user - (currently useing vidLink as they are unique from reddit per post)
+      if (
+        profile.savedVids.filter(vid => vid.vidLink === newVid.vidLink).length >
+        0
+      ) {
+        return res.status(400).json({ msg: "Video already saved" });
+      }
+
       profile.savedVids.unshift(newVid);
 
-      profile.save().then(profile => res.json(profile));
+      await profile.save();
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+// @route    DELETE api/profile/savevid/:vid_id
+// @desc     Delete saved video from profile
+// @access   Private
+router.delete("/savevid/:vid_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    // get remove index
+    const removeIndex = profile.savedVids
+      .map(item => item.id)
+      .indexOf(req.params.vid_id);
+
+    profile.savedVids.splice(removeIndex, 1);
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    GET api/profile/savevid
+// @desc     Get all saved vids
+// @access   Private
+router.get("/savevid", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id
     });
+
+    const videos = await profile.savedVids;
+
+    res.json(videos);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
-);
-
-// @route  DELETE api/profile/savedVids/:savedVids_id
-// @desc  Remove a saved video from profile
-// @access private
-router.delete(
-  "/savedVids/:savedVids_id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id })
-      .then(profile => {
-        // Get remove index
-        const removeIndex = profile.savedVids
-          .map(item => item.id)
-          .indexOf(req.params.savedVids_id);
-
-        // Splice out of array
-        profile.savedVids.splice(removeIndex, 1);
-
-        // Save
-        profile.save().then(profile => res.json(profile));
-      })
-      .catch(err => res.status(404).json(err));
-  }
-);
-
-// @route  GET api/profile/savedVids
-// @desc  get all videos
-// @access public
-router.get(
-  "/savedVids",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Profile.findOne({ user: req.user.id })
-      .then(profile => {
-        res.json(profile.savedVids);
-        // .find()
-        // // .sort({ date: -1 })
-        // .then(vids => res.json(vids))
-        // .catch(err => res.status(404));
-      })
-      .catch(err => res.status(404));
-  }
-);
-
-// @route  DELETE api/profile
-// @desc  delete user and profile
-// @access private
-router.delete(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
-      User.findOneAndRemove({ _id: req.user.id }).then(() =>
-        res.json({ success: true })
-      );
-    });
-  }
-);
+});
 
 module.exports = router;

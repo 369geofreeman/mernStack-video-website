@@ -1,0 +1,34 @@
+.registerFormContainer {
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 5em 2em 5em;
+}
+
+.registerFormEmail {
+  border-bottom: 2px solid #333;
+  color: #222;
+  font-size: 1.5em;
+  margin: 20px 0;
+  padding-bottom: 6px;
+  transition: border-bottom 500ms ease-out;
+}
+.registerFormEmail:focus {
+  border-bottom: 2px solid red;
+}
+.registerFormEmail.input::placeholder {
+  color: rgb(95, 95, 95);
+}
+.registerFormEmail:focus::-webkit-input-placeholder {
+  transition: color 300ms ease-out;
+  color: red;
+}
+.registerFormEmail:focus {
+  outline-width: 0;
+}
+.signinHelperText {
+  font-weight: 400
+}
+.loginFormError{
+  color: red;
+  padding: 1% 0
+}

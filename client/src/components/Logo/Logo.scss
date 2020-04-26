@@ -1,0 +1,21 @@
+$LogoSize: 20em;
+
+.mainStyleLogo {
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+}
+.mainStyleLogo:hover {
+  transform: scaleX(1.1);
+  margin-right: 4em;
+}
+.mainStyleLogo::after{
+  transform: scale(1);
+  margin: 0
+}
+
+@media (max-width: 824px) {
+  .mainStyleLogo {
+    width: $LogoSize * 0.5;
+    height: $LogoSize * 0.5
+  }
+}

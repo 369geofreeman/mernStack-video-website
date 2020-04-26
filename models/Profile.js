@@ -5,12 +5,7 @@ const Schema = mongoose.Schema;
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users"
-  },
-  handle: {
-    type: String,
-    required: true,
-    max: 40
+    ref: "user"
   },
   savedVids: [
     {
@@ -18,7 +13,8 @@ const ProfileSchema = new Schema({
         type: String
       },
       vidLink: {
-        type: String
+        type: String,
+        required: true
       },
       category: {
         type: String

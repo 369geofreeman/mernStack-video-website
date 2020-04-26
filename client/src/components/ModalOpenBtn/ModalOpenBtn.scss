@@ -1,0 +1,107 @@
+$buttonheight:3;
+
+.Hamburger {
+  margin: 0;
+  position: relative;
+  width: 18px*$buttonheight;
+  height: 14px*$buttonheight;
+  padding: 12px*$buttonheight 0;
+  b {
+    display: block;
+    position: absolute;
+    height: 2px*$buttonheight;
+    width: 18px*$buttonheight;
+    background: #FFF;
+    border-radius: 4px*$buttonheight;
+    transform-origin: 0 50%;
+  }
+  b:first-child {
+    top: 12px*$buttonheight;
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  b:nth-child(2) {
+    top: 18px*$buttonheight;
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  b:last-child {
+    top: 24px*$buttonheight;
+    width: 12px*$buttonheight;
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  &:hover {
+    cursor: pointer;
+    b { animation: menu-hover .3s forwards cubic-bezier(0.0, 0.0, 0.2, 1) 1; }
+    b:nth-child(2) { animation-delay: .1s; }
+    b:last-child   { animation-delay: .2s; }
+  }
+}
+@keyframes menu-hover {
+  60% {
+    transform: scaleX(1.4);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+.HamburgerContainer{
+  transform: scale(1);
+  transition: all .5s ease-in-out;
+}
+.HamburgerContainerAfter {
+  transition: all .5s ease-in-out;
+  transform: scale(0.5)
+}
+
+
+@media (max-width: 824px) {
+  .Hamburger {
+    margin: auto;
+    position: relative;
+    width: 18px*$buttonheight/2;
+    height: 14px*$buttonheight/2;
+    padding: 12px*$buttonheight/2 10px*$buttonheight/2;
+    b {
+      display: block;
+      position: absolute;
+      height: 2px*$buttonheight/2;
+      width: 18px*$buttonheight/2;
+      background: #FFF;
+      border-radius: 4px*$buttonheight/2;
+      transform-origin: 0 50%;
+    }
+    b:first-child {
+      top: 12px*$buttonheight/2;
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    b:nth-child(2) {
+      top: 18px*$buttonheight/2;
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    b:last-child {
+      top: 24px*$buttonheight/2;
+      width: 12px*$buttonheight/2;
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    &:hover {
+      cursor: pointer;
+      b { animation: menu-hover .3s forwards cubic-bezier(0.0, 0.0, 0.2, 1) 1; }
+      b:nth-child(2) { animation-delay: .1s; }
+      b:last-child   { animation-delay: .2s; }
+    }
+  }
+  @keyframes menu-hover {
+    60% {
+      transform: scaleX(1.4);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
+}
