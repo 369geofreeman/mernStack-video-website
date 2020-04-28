@@ -9,7 +9,6 @@ const Logo = props => {
 
   const defaultOptions = {
     loop: false,
-    // autoplay: true,
     animationData: animationData.default,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice"
@@ -30,19 +29,10 @@ const Logo = props => {
         options={defaultOptions}
         height={120}
         width={220}
-        // isStopped={isStopped}
         ref={animation}
-        // onMouseOver={setIsStopped(true)}
       />
     </div>
   );
 };
 
 export default Logo;
-
-/* <img
-onClick={props.resetIndex}
-src={require("../../assets/logos/logo1.png")}
-className={!props.mouseMoving ? "mainStyleLogo" : "mainStyleLogoAfter"}
-alt=""
-/> */

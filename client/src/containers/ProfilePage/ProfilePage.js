@@ -30,7 +30,11 @@ const ProfilePage = () => {
           path="/:userId/profile/categories"
           component={Categories}
         />
-        <Route exact path="/:userId/profile/settings" component={AccountSettings} />
+        <Route
+          exact
+          path="/:userId/profile/settings"
+          component={AccountSettings}
+        />
       </Switch>
     </div>
   );

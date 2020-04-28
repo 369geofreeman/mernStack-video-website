@@ -54,14 +54,12 @@ const CategoryPlayerButtons = props => {
   );
 };
 
-//  Redux
+// Redux
 const mapStateToProps = state => {
   return {
-    mouseMoving: state.MouseMoving.mouseMoving,
-    isLoggedIn: state.Authenticate.isLoggedIn
+    isLoggedIn: state.Authenticate.isAuthenticated
   };
 };
-
 const mapDispatchToProps = dispatch => {
   return {
     onResetCurrentIndex: index => dispatch(currentIndex(index))

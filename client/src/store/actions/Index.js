@@ -1,8 +1,8 @@
-// on Mouse move
-export { mouseMoving, mouseNotMoving } from "./MouseMoving";
-
 // Authenticate
-export { logIn, logOut, register } from "./Authenticate";
+export { logout, register, loadUser, login } from "./Authenticate";
+
+// Alerts
+export { setAlert } from "./alert";
 
 // Video Index
 export {

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 // redux vars
-import { logIn } from "../../../../store/actions/Index";
+import { login } from "../../../../store/actions/Index";
+// components
+import Alert from "../../../Alert/Alert";
 // Styles
 import "./SignInForm.scss";
 
-const SignInForm = props => {
-  const [emailError, setEmailError] = useState("");
+const SignInForm = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -19,9 +21,14 @@ const SignInForm = props => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    if (!email) setEmailError("Please enter a valid email");
-    console.log("Success!");
+    login(email, password);
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
+  console.log(isAuthenticated);
 
   return (
     <div className="registerFormContainer">
@@ -36,7 +43,6 @@ const SignInForm = props => {
             onChange={e => onChange(e)}
             required
           />
-          <div className="loginFormError">{emailError}</div>
         </div>
         <div>
           <input
@@ -49,7 +55,7 @@ const SignInForm = props => {
             onChange={e => onChange(e)}
             required
           />
-          <div className="loginFormError">{emailError}</div>
+          <Alert />
         </div>
         <div className="formBtnContainer">
           <input type="submit" value="Login" className="submitBtn" />
@@ -59,14 +65,14 @@ const SignInForm = props => {
   );
 };
 
-//  Redux mapping
-const mapDispatchToProps = dispatch => {
+//  Redux
+const mapStateToProps = state => {
   return {
-    onLogIn: () => dispatch(logIn())
+    isAuthenticated: state.Authenticate.isAuthenticated
   };
 };
 
 export default connect(
-  null,
-  mapDispatchToProps
+  mapStateToProps,
+  { login }
 )(SignInForm);

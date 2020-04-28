@@ -2,11 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { logOut } from "../../../store/actions/Index";
+import { logout } from "../../../store/actions/Index";
 import "./SideMenu.scss";
 
-const SideMenu = props => {
-
+const SideMenu = ({ logout }) => {
   return (
     <nav id="nav" role="navigation" className="sideMenuContainer">
       <ul>
@@ -51,7 +50,12 @@ const SideMenu = props => {
             Account Settings
           </NavLink>
         </li>
-        <li onClick={() =>  window.confirm('Are you sure you wish to dlog out?') && props.onLogOut()  } className="sideMenuTitles">
+        <li
+          onClick={() =>
+            window.confirm("Are you sure you wish to dlog out?") && logout()
+          }
+          className="sideMenuTitles"
+        >
           Log Out
         </li>
       </ul>
@@ -62,14 +66,7 @@ const SideMenu = props => {
 // https://codesandbox.io/s/vq823o4947 MOBILE VIEW ANIMATION
 // https://codesandbox.io/s/p9v05k68oq Nested routes
 
-//  Redux mapping
-const mapDispatchToProps = dispatch => {
-  return {
-    onLogOut: () => dispatch(logOut())
-  };
-};
-
 export default connect(
   null,
-  mapDispatchToProps
+  { logout }
 )(SideMenu);

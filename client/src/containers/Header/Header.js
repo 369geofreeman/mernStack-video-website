@@ -9,18 +9,10 @@ import LoggedInNav from "../../components/LoggedInNavState/LoggedInNav";
 import LoggedOutNav from "../../components/LoggedInNavState/LoggedOutNav";
 import "./Header.scss";
 // Redux
-import {
-  mouseMoving,
-  mouseNotMoving,
-  currentIndex
-} from "../../store/actions/Index";
+import { currentIndex } from "../../store/actions/Index";
 
 const Header = props => {
   let location = useLocation();
-
-  const setMouseMove = () => {
-    props.onMouseMoving();
-  };
 
   const resetIndex = () => {
     props.onResetCurrentIndex(0);
@@ -29,36 +21,27 @@ const Header = props => {
   return (
     <div className="headerContainer">
       <Link to="/" className="headerLeftContainer">
-        <Logo
-          resetIndex={resetIndex}
-          mouseMoving={props.mouseMoving}
-          onMouseMove={() => setMouseMove()}
-        />
+        <Logo resetIndex={resetIndex} />
         <div className="headerLeftTitlesContainer"></div>
       </Link>
 
       <div className="headerRightSideContainer">
         {props.isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
         {location.pathname.match("/profile/categories") ? null : (
-          <ModalOpenBtn moving={props.mouseMoving} />
+          <ModalOpenBtn />
         )}
       </div>
     </div>
   );
 };
 
-//  Redux mapping
-const mapStateToProps = state => {
-  return {
-    mouseMoving: state.MouseMoving.mouseMoving,
-    isLoggedIn: state.Authenticate.isLoggedIn
-  };
-};
+//  Redux
+const mapStateToProps = state => ({
+  isLoggedIn: state.Authenticate.isAuthenticated
+});
 
 const mapDispatchToProps = dispatch => {
   return {
-    onMouseMoving: () => dispatch(mouseMoving()),
-    onMouseNotMoving: () => dispatch(mouseNotMoving()),
     onResetCurrentIndex: index => dispatch(currentIndex(index))
   };
 };

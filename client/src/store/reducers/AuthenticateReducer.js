@@ -1,8 +1,11 @@
 import {
-  LOG_IN,
-  LOG_OUT,
-  RESISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGOUT
 } from "../actions/ActionTypes";
 
 export const initialState = {
@@ -16,18 +19,15 @@ export const initialState = {
 const AuthenticateReducer = (state = initialState, action) => {
   const { payload, type } = action;
   switch (type) {
-    case LOG_IN:
+    case USER_LOADED:
       return {
         ...state,
-        isLoggedIn: true
+        isAuthenticated: true,
+        loading: false,
+        user: payload
       };
-    case LOG_OUT:
-      return {
-        ...state,
-        isLoggedIn: false
-      };
-    // SET HERE
     case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
       return {
         ...state,
@@ -36,6 +36,9 @@ const AuthenticateReducer = (state = initialState, action) => {
         loading: false
       };
     case REGISTER_FAIL:
+    case AUTH_ERROR:
+    case LOGIN_FAIL:
+    case LOGOUT:
       localStorage.removeItem("token");
       return {
         ...state,

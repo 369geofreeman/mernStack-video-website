@@ -5,12 +5,11 @@ import ReactTooltip from "react-tooltip";
 // Imgs
 import clipped from "../../assets/img/clipped.png";
 import unClipped from "../../assets/img/unClipped.png";
-// import collection from "../../assets/img/boobIcon.png";
 import collection2 from "../../assets/img/pornFolderIcon.png";
 
 import "./LoggedInNav.scss";
 
-const LoggedInNav = props => {
+const LoggedInNav = () => {
   const [liked, setLiked] = useState(false);
   const { x } = useSpring({
     from: { x: 0 },

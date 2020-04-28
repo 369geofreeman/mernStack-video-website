@@ -1,12 +1,15 @@
-// On mouse move
-export const MOUSE_MOVING = "MOUSE_MOVING";
-export const MOUSE_NOT_MOVING = "MOUSE_NOT_MOVING";
-
 // Authenticate
-export const LOG_IN = "LOG_IN";
-export const LOG_OUT = "LOG_OUT";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
+export const USER_LOADED = "USER_LOADED";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGOUT = "LOGOUT";
+
+// Alerts
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
 
 // VideoIndex
 export const CURRENT_INDEX = "CURRENT_INDEX";

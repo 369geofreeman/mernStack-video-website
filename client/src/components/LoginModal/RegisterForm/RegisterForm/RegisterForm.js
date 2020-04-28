@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-// Redux vars
+import { Redirect } from "react-router-dom";
+// Redux
 import { register } from "../../../../store/actions/Index";
-// My components
+// Components
+import Alert from "../../../Alert/Alert";
 import "./RegisterForm.scss";
 
-const RegisterForm = ({ register }) => {
+const RegisterForm = ({ register, isAuthenticated }) => {
   const [emailError, setEmailError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -27,6 +29,11 @@ const RegisterForm = ({ register }) => {
       register({ name, email, password });
     }
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="registerFormContainer">
@@ -75,25 +82,25 @@ const RegisterForm = ({ register }) => {
             value={password2}
             onChange={e => onChange(e)}
           />
+          <Alert className="loginFormError" />
           <div className="loginFormError">{emailError}</div>
         </div>
         <div className="formBtnContainer">
           <input type="submit" className="submitBtn" value="Lets go" />
         </div>
       </form>
-      {/* <SubmitBtn handleSubmit={e => onSubmit(e)} /> */}
     </div>
   );
 };
 
-//  Redux mapping
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onLogIn: () => dispatch(logIn())
-//   };
-// };
+//  Redux
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.Authenticate.isAuthenticated
+  };
+};
 
 export default connect(
-  null,
+  mapStateToProps,
   { register }
 )(RegisterForm);

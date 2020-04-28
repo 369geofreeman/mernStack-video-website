@@ -31,7 +31,11 @@ const SavedVids = props => {
   );
 };
 
-//  Redux mapping
+//  Redux
+const mapStateToProps = state => ({
+  auth: state.Authentication
+}); // Need to use this still | Use on account settings too
+
 const mapDispatchToProps = dispatch => {
   return {
     onCurrentIndex: index => dispatch(userSavedIndex(index))
@@ -39,6 +43,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SavedVids);

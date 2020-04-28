@@ -3,18 +3,20 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 
-import categories from '../../assets/dummyData/caegories'
+import categories from "../../assets/dummyData/caegories";
 
-import { categoryTitle , currentCategoryIndex } from '../../store/actions/Index'
+import { categoryTitle, currentCategoryIndex } from "../../store/actions/Index";
 import "./VideoTitle.css";
 
 const VideoTitle = props => {
-  const firstCategoryId = categories.filter(cat => cat.categoryTag === props.categoryTag)[0].id
+  const firstCategoryId = categories.filter(
+    cat => cat.categoryTag === props.categoryTag
+  )[0].id;
 
   const setCategory = () => {
-    props.onCategoryTitle(props.categoryTag)
+    props.onCategoryTitle(props.categoryTag);
     // props.onCurrentCategoryIndex(0)
-  }
+  };
 
   return (
     <div className="headerVideoTitle">
@@ -44,19 +46,15 @@ const VideoTitle = props => {
   );
 };
 
-//  Redux mapping
-
-const mapStateToProps = state => {
-  return {
-    mouseMoving: state.MouseMoving.mouseMoving
-  };
-};
-
+//  Redux
 const mapDispatchToProps = dispatch => {
   return {
-    onCategoryTitle: (title) => dispatch(categoryTitle(title)),
+    onCategoryTitle: title => dispatch(categoryTitle(title)),
     onCurrentCategoryIndex: () => dispatch(currentCategoryIndex())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(VideoTitle);
+export default connect(
+  null,
+  mapDispatchToProps
+)(VideoTitle);

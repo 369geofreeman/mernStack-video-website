@@ -9,11 +9,7 @@ import { connect } from "react-redux";
 import HomePageButtons from "./HomePageButtons";
 import VideoTitle from "../../components/VideoTitle/VideoTitle";
 // Redux vars
-import {
-  mouseMoving,
-  mouseNotMoving,
-  currentIndex
-} from "../../store/actions/Index";
+import { currentIndex } from "../../store/actions/Index";
 // Dummy data ( DUMMY_DATA_NSFW )
 // import { DUMMY_DATA_SFW as DUMMY_DATA } from "../../assets/dummyData/videos";
 import jData from "../../assets/dummyData/categoryVids/AllCategories.json";
@@ -26,7 +22,6 @@ import "./HomePage.scss";
 const HomePage = props => {
   const { height, width } = useWindowDimensions();
   const [videos] = useState(jData);
-  const [videoPlaying, setVideoPlaying] = useState(true);
   const [videoLen] = useState(jData.length - 1);
   const [toggleVideoWithSpace, setToggleVideoWithSpace] = useState(true);
 
@@ -78,32 +73,6 @@ const HomePage = props => {
     onResetCurrentIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
   };
 
-  const onVideoPlaying = () => {
-    setVideoPlaying(true);
-    setSmallHeader();
-  };
-
-  const onVideoPaused = () => {
-    setVideoPlaying(false);
-    setLargeHeader();
-  };
-
-  // Set if mouse over header
-  const smallHeaderMouseOverBody = () => {
-    if (videoPlaying) {
-      setSmallHeader();
-    } else {
-      setLargeHeader();
-    }
-  };
-
-  const setSmallHeader = () => {
-    props.onMouseNotMoving();
-  };
-  const setLargeHeader = () => {
-    props.onMouseMoving();
-  };
-
   let slides = videos.map((slide, index) => {
     return (
       <div data-src="" key={slide.vidLink}>
@@ -117,8 +86,6 @@ const HomePage = props => {
           playing={toggleVideoWithSpace}
           loop
           controls
-          onPlay={onVideoPlaying}
-          onPause={onVideoPaused}
           disablePictureInPicture={true}
           style={{ backgroundColor: "#000" }}
           config={{
@@ -138,7 +105,7 @@ const HomePage = props => {
   let vidUrlIndexTo = VideoIndex === videoLen ? VideoIndex : VideoIndex + 1;
   let vidUrlIndexFrom = VideoIndex === 0 ? videoLen : VideoIndex - 1;
   return (
-    <div onMouseMove={smallHeaderMouseOverBody} className="mainPageContainer">
+    <div className="mainPageContainer">
       <AwesomeSlider
         animation="openAnimation"
         cssModule={[CoreStyles, AnimationStyles]}
@@ -163,7 +130,6 @@ const HomePage = props => {
 //  Redux mapping
 const mapStateToProps = state => {
   return {
-    mouseMoving: state.MouseMoving.mouseMoving,
     VideoIndex: state.VideoIndex.currentIndex,
     modalOpen: state.ModalOpen.modalOpen
   };
@@ -171,8 +137,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onMouseMoving: () => dispatch(mouseMoving()),
-    onMouseNotMoving: () => dispatch(mouseNotMoving()),
     onResetCurrentIndex: index => dispatch(currentIndex(index))
   };
 };

@@ -20,15 +20,20 @@ const SavedVidsSliderButtons = props => {
 
   const resetIndex = () => {
     props.onResetUserSavedIndex(0);
-    props.onCurrentIndex(0)
+    props.onCurrentIndex(0);
   };
 
   return (
     <div>
       <Link to="/" className="userModalLogo">
-      <Lottie options={defaultOptions} height={80} width={220}  onClick={resetIndex}/>
+        <Lottie
+          options={defaultOptions}
+          height={80}
+          width={220}
+          onClick={resetIndex}
+        />
       </Link>
-      <Link className="userModalCloseContainer" to="/u1/profile">
+      <Link className="userModalCloseContainer" to={`/${"u2"}/profile`}>
         <img
           src={require("../../../assets/img/close.png")}
           alt=""
