@@ -1,8 +1,9 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
 
 import { DUMMY_DATA_SFW as vids } from "../../assets/dummyData/videos";
-// My Components
+// Components
+import PrivateRoute from "../../navigation/PrivateRoute";
 import SideMenu from "../../components/ProfilePage/SideMenu/SideMenu";
 import SavedVidsContainer from "../../components/ProfilePage/SavedVids/SavedVidsContainer";
 import Categories from "../../components/ProfilePage/Categories/Categories";
@@ -24,13 +25,17 @@ const ProfilePage = () => {
         <SideMenu />
       </div>
       <Switch>
-        <Route exact path="/:userId/profile" component={SavedVidsContainer} />
-        <Route
+        <PrivateRoute
+          exact
+          path="/:userId/profile"
+          component={SavedVidsContainer}
+        />
+        <PrivateRoute
           exact
           path="/:userId/profile/categories"
           component={Categories}
         />
-        <Route
+        <PrivateRoute
           exact
           path="/:userId/profile/settings"
           component={AccountSettings}

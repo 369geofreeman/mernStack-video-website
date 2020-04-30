@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Currently not being used but will be for the xpansion of a user profile if we include uploads etc.
+
 // Create Schema
 const ProfileSchema = new Schema({
   user: {

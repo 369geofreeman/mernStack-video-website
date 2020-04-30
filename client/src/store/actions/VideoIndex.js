@@ -5,11 +5,11 @@ import {
   CURRENT_CATEGORY_INDEX
 } from "./ActionTypes";
 
-export const currentIndex = index => {
-  return {
+export const currentIndex = index => dispatch => {
+  dispatch({
     type: CURRENT_INDEX,
     payLoad: index
-  };
+  });
 };
 
 export const userSavedIndex = index => {

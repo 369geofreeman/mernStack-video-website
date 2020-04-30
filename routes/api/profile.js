@@ -6,6 +6,9 @@ const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
+// THis is set up for the expansion of user profile.
+// It enables the option to add more info on the user and allow them to upload videos etc
+
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private

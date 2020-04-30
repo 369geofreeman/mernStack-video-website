@@ -19,10 +19,10 @@ import useWindowDimensions from "../../assets/utils/getWindowDimensions";
 // Styles
 import "./HomePage.scss";
 
-const HomePage = props => {
+const HomePage = ({ currentIndex, currentVideos, VideoIndex, modalOpen }) => {
   const { height, width } = useWindowDimensions();
-  const [videos] = useState(jData);
-  const [videoLen] = useState(jData.length - 1);
+  const [videos] = useState(jData); // Use jData for now
+  const [videoLen] = useState(videos.length - 1);
   const [toggleVideoWithSpace, setToggleVideoWithSpace] = useState(true);
 
   const rightPress = useKeyPress("ArrowRight");
@@ -30,8 +30,6 @@ const HomePage = props => {
   const leftPress = useKeyPress("ArrowLeft");
   const aPress = useKeyPress("a");
   const spacePress = useKeyPress(" ");
-
-  const { onResetCurrentIndex, VideoIndex, modalOpen } = props;
 
   // Set the Video index from URL
   // let VideoIndex = 0;
@@ -43,21 +41,24 @@ const HomePage = props => {
   //   VideoIndex = VideoIndexRedux;
   // }
 
+  // Get Videos
+  // useEffect(() => {
+  //   setVideos(currentVideos);
+  // }, []);
+
   // Assign keybord to video controlls
   useEffect(() => {
     if (rightPress || dPress) {
-      !modalOpen &&
-        onResetCurrentIndex(VideoIndex === videoLen ? 0 : VideoIndex + 1);
+      !modalOpen && currentIndex(VideoIndex === videoLen ? 0 : VideoIndex + 1);
     }
     // eslint-disable-next-line
-  }, [rightPress, dPress, videoLen, onResetCurrentIndex, modalOpen]);
+  }, [rightPress, dPress, videoLen, currentIndex, modalOpen]);
   useEffect(() => {
     if (leftPress || aPress) {
-      !modalOpen &&
-        onResetCurrentIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
+      !modalOpen && currentIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
     }
     // eslint-disable-next-line
-  }, [leftPress, aPress, videoLen, onResetCurrentIndex, modalOpen]);
+  }, [leftPress, aPress, videoLen, currentIndex, modalOpen]);
   useEffect(() => {
     if (spacePress) {
       !modalOpen && setToggleVideoWithSpace(prevState => !prevState);
@@ -66,11 +67,11 @@ const HomePage = props => {
 
   // Set video Controlls
   const nextIndex = () => {
-    onResetCurrentIndex(VideoIndex === videoLen ? 0 : VideoIndex + 1);
+    currentIndex(VideoIndex === videoLen ? 0 : VideoIndex + 1);
   };
 
   const previousIndex = () => {
-    onResetCurrentIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
+    currentIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
   };
 
   let slides = videos.map((slide, index) => {
@@ -119,7 +120,7 @@ const HomePage = props => {
       </AwesomeSlider>
       <HomePageButtons
         nextIndex={nextIndex}
-        to={`/${videos[vidUrlIndexTo]._id}`}
+        to={`/${videos[vidUrlIndexTo]._id}`} // USE .id
         previousIndex={previousIndex}
         from={`/${videos[vidUrlIndexFrom]._id}`}
       />
@@ -131,17 +132,13 @@ const HomePage = props => {
 const mapStateToProps = state => {
   return {
     VideoIndex: state.VideoIndex.currentIndex,
-    modalOpen: state.ModalOpen.modalOpen
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onResetCurrentIndex: index => dispatch(currentIndex(index))
+    modalOpen: state.ModalOpen.modalOpen,
+    loading: state.Videos.loading,
+    currentVideos: state.Videos.videos
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { currentIndex }
 )(HomePage);

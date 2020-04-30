@@ -15,16 +15,8 @@ const Logo = props => {
     }
   };
 
-  const hoverOn = () => {
-    animation.current.play();
-  };
-
   return (
-    <div
-      className="mainStyleLogo"
-      onClick={props.resetIndex}
-      onMouseOver={hoverOn}
-    >
+    <div className="mainStyleLogo" onClick={props.resetIndex}>
       <Lottie
         options={defaultOptions}
         height={120}

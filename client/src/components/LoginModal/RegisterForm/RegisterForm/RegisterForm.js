@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 // Redux
-import { register } from "../../../../store/actions/Index";
+import { register, createProfile } from "../../../../store/actions/Index";
 // Components
 import Alert from "../../../Alert/Alert";
 import "./RegisterForm.scss";
 
-const RegisterForm = ({ register, isAuthenticated }) => {
+const RegisterForm = ({ register }) => {
   const [emailError, setEmailError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
+    savedVids: []
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, password2, savedVids } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,14 +26,9 @@ const RegisterForm = ({ register, isAuthenticated }) => {
     if (password !== password2) {
       setEmailError("Passwords do not match");
     } else {
-      register({ name, email, password });
+      register({ name, email, password, savedVids });
     }
   };
-
-  // Redirect if logged in
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <div className="registerFormContainer">
@@ -102,5 +97,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { register }
+  { register, createProfile }
 )(RegisterForm);

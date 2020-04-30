@@ -14,6 +14,26 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  savedVids: [
+    {
+      title: {
+        type: String
+      },
+      vidLink: {
+        type: String,
+        required: true
+      },
+      category: {
+        type: String
+      },
+      categoryTag: {
+        type: String
+      },
+      thumbNail: {
+        type: String
+      }
+    }
+  ],
   date: {
     type: Date,
     default: Date.now

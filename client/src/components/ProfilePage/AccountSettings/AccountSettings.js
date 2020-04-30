@@ -1,30 +1,38 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
+// Components
+import Spinner from "../../../layout/Spinner";
 import "./AccountSettings.scss";
 
-// DUMMY_DATA
-import DUMMY_USERS from "../../../assets/dummyData/users";
-const user = DUMMY_USERS[0];
+// To Delete a profile bring in deleteAccount from actions/Index and wire that bitch up
 
-const AccountSettings = () => {
+const AccountSettings = ({ auth: { user, loading } }) => {
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [changeEmail, setChangeEmail] = useState(false);
 
-  return (
+  return loading && user === null ? (
+    <Spinner />
+  ) : (
     <div className="accountSettingsContainer">
-    <img src={require('../../../assets/img/Hooks.png')} alt="" className="AccountHeaderImg" />
-      <h1 className="accountUserEmail">{user.email}</h1>
+      <img
+        src={require("../../../assets/img/Hooks.png")}
+        alt=""
+        className="AccountHeaderImg"
+      />
+      <h1 className="accountUserEmail">Welcome {user && user.name}</h1>
       <div className="acountTitle">
         <div className="accountTitleContainer">
           <h2 className="accountSavedVidsText">Collection:</h2>
-          <h2 className="accountSavedVidsTextRes">369 Clips</h2>
+          <h2 className="accountSavedVidsTextRes">
+            {user && user.savedVids.length} Clips
+          </h2>
         </div>
         <div className="accountTitleContainer">
           <h2 className="accountSavedVidsText">Member since:</h2>
-          <h2 className="accountSavedVidsTextRes">11/11/22</h2>
+          <h2 className="accountSavedVidsTextRes">{user && user.date}</h2>
         </div>
       </div>
-
       <div className="accountChangeCredentualsContainer">
         <div className="accountChangePasswordContainer">
           {showChangePassword ? (
@@ -112,4 +120,9 @@ const AccountSettings = () => {
   );
 };
 
-export default AccountSettings;
+const mapStateToProps = state => ({
+  auth: state.Authenticate,
+  profile: state.Profile
+});
+
+export default connect(mapStateToProps)(AccountSettings);

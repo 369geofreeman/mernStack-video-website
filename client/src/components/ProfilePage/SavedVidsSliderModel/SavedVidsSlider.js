@@ -4,9 +4,6 @@ import AwesomeSlider from "react-awesome-slider";
 import ReactPlayer from "react-player";
 import CoreStyles from "react-awesome-slider/src/core/styles.scss";
 import AnimationStyles from "react-awesome-slider/src/styled/open-animation/open-animation.scss";
-
-// Dummy data ( DUMMY_DATA_NSFW )
-import jData from "../../../assets/dummyData/categoryVids/AllCategories.json";
 // Redux
 import { userSavedIndex } from "../../../store/actions/Index";
 // Helper functions
@@ -15,12 +12,18 @@ import useWindowDimensions from "../../../assets/utils/getWindowDimensions";
 // My Components
 import VideoTitle from "../../VideoTitle/VideoTitle";
 import SavedVidsSliderButtons from "./SavedVidsSliderButtons";
+import Spinner from "../../../layout/Spinner";
 import "./SavedVidsSliderModal.scss";
 
-const SavedVidsSlider = props => {
+const SavedVidsSlider = ({
+  onResetSavedIndex,
+  VideoIndex,
+  modalOpen,
+  auth: { user, loading }
+}) => {
   const { width, height } = useWindowDimensions();
-  const [videos] = useState(jData);
-  const [videoLen] = useState(jData.length - 1);
+  const [videos] = useState(user.savedVids);
+  const [videoLen] = useState(user.savedVids.length - 1);
   const [toggleVideoWithSpace, setToggleVideoWithSpace] = useState(true);
 
   const rightPress = useKeyPress("ArrowRight");
@@ -28,8 +31,6 @@ const SavedVidsSlider = props => {
   const leftPress = useKeyPress("ArrowLeft");
   const aPress = useKeyPress("a");
   const spacePress = useKeyPress(" ");
-
-  const { onResetSavedIndex, VideoIndex, modalOpen } = props;
 
   useEffect(() => {
     if (rightPress || dPress) {
@@ -91,7 +92,9 @@ const SavedVidsSlider = props => {
   let vidUrlIndexTo = VideoIndex === videoLen ? VideoIndex : VideoIndex + 1;
   let vidUrlIndexFrom = VideoIndex === 0 ? videoLen : VideoIndex - 1;
 
-  return (
+  return loading && user === null ? (
+    <Spinner />
+  ) : (
     <div className="savedVidsSliderContainer">
       <AwesomeSlider
         animation="openAnimation"
@@ -117,6 +120,7 @@ const SavedVidsSlider = props => {
 // Redux Vars
 const mapStateToProps = state => {
   return {
+    auth: state.Authenticate,
     VideoIndex: state.VideoIndex.userSavedIndex,
     modalOpen: state.ModalOpen.modalOpen
   };

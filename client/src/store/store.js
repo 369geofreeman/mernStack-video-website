@@ -6,6 +6,8 @@ import AuthenticateReducer from "./reducers/AuthenticateReducer";
 import VideoIndexReducer from "./reducers/VideoIndexReducer";
 import CategoryModalOpen from "./reducers/CategoryModalOpen";
 import AlertReducer from "./reducers/AlertReducer";
+import ProfileReducer from "./reducers/ProfileReducer";
+import VideosReducer from "./reducers/VideosReducer";
 
 const initialState = {};
 const middleWare = [thunk];
@@ -13,8 +15,10 @@ const middleWare = [thunk];
 const rootreducer = combineReducers({
   Authenticate: AuthenticateReducer,
   Alert: AlertReducer,
+  ModalOpen: CategoryModalOpen,
+  Profile: ProfileReducer,
   VideoIndex: VideoIndexReducer,
-  ModalOpen: CategoryModalOpen
+  Videos: VideosReducer
 });
 
 const store = createStore(

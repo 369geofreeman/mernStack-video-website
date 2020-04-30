@@ -5,11 +5,12 @@ import {
   LOGIN_FAIL,
   USER_LOADED,
   AUTH_ERROR,
-  LOGOUT
+  LOGOUT,
+  ADD_SAVED_VID,
+  ACCOUNT_DELETED
 } from "../actions/ActionTypes";
 
 export const initialState = {
-  isLoggedIn: false,
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
@@ -39,12 +40,18 @@ const AuthenticateReducer = (state = initialState, action) => {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
+    case ACCOUNT_DELETED:
       localStorage.removeItem("token");
       return {
         ...state,
         token: null,
         isAuthenticated: false,
         loading: false
+      };
+    case ADD_SAVED_VID:
+      return {
+        ...state,
+        user: payload
       };
 
     default:
