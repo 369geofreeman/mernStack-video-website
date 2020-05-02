@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { categoryTitle } from '../../../store/actions/Index'
+import { categoryTitle } from "../../../store/actions/Index";
 
-import categories from "../../../assets/dummyData/caegories";
+import categories from "../../../assets/utils/caegories";
 import "./Categories.scss";
 
 const Categories = props => {
@@ -47,7 +47,7 @@ const Categories = props => {
         {searchResults.map((item, index) => (
           <li className={"block-" + index} key={item.id}>
             <Link
-              style={{textDecoration: 'none'}}
+              style={{ textDecoration: "none" }}
               onClick={() => props.onCategoryTitle(item.categoryTag)}
               to={`/categories/${item.categoryTag}/${item.id}`}
             >
@@ -68,8 +68,11 @@ const Categories = props => {
 //  Redux mapping
 const mapDispatchToProps = dispatch => {
   return {
-    onCategoryTitle: (title) => dispatch(categoryTitle(title))
+    onCategoryTitle: title => dispatch(categoryTitle(title))
   };
 };
 
-export default connect(null,mapDispatchToProps)(Categories);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Categories);

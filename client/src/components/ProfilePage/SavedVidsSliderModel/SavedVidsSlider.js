@@ -9,7 +9,7 @@ import { userSavedIndex } from "../../../store/actions/Index";
 // Helper functions
 import useKeyPress from "../../../assets/utils/useKeyPress";
 import useWindowDimensions from "../../../assets/utils/getWindowDimensions";
-// My Components
+// Components
 import VideoTitle from "../../VideoTitle/VideoTitle";
 import SavedVidsSliderButtons from "./SavedVidsSliderButtons";
 import Spinner from "../../../layout/Spinner";
@@ -109,9 +109,9 @@ const SavedVidsSlider = ({
       </AwesomeSlider>
       <SavedVidsSliderButtons
         nextIndex={nextIndex}
-        to={`/saved/${videos[vidUrlIndexTo].id}`}
+        to={`/saved/${videos[vidUrlIndexTo]._id}`}
         previousIndex={previousIndex}
-        from={`/saved/${videos[vidUrlIndexFrom].id}`}
+        from={`/saved/${videos[vidUrlIndexFrom]._id}`}
       />
     </div>
   );

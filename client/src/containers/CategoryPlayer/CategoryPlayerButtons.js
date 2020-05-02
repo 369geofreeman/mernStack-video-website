@@ -31,7 +31,12 @@ const CategoryPlayerButtons = props => {
         {props.isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
         <ModalOpenBtn />
       </div>
-      <Link to="/" className="userModalLogo" onClick={resetIndex}>
+      <Link
+        to="/"
+        className="userModalLogo"
+        style={{ zIndex: 2000 }}
+        onClick={resetIndex}
+      >
         <Lottie options={defaultOptions} height={80} width={220} />
       </Link>
       <Link

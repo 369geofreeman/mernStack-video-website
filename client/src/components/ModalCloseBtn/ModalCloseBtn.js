@@ -1,24 +1,20 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
 
-import { modalClose } from '../../store/actions/Index'
-import './ModalCloseBtn.scss'
+import { modalClose } from "../../store/actions/Index";
+import "./ModalCloseBtn.scss";
 
-const ModalCloseBtn = props => {
-
-
+const ModalCloseBtn = ({ modalClose, close }) => {
   return (
-    <div className="closeBtnContainer" onClick={props.close}>
-    <div className="closeBtnText" onClick={() => props.onModalClose()}>x</div>
+    <div className="closeBtnContainer" onClick={close}>
+      <div className="closeBtnText" onClick={() => modalClose()}>
+        x
+      </div>
     </div>
-  )
-}
-
-//  Redux mapping
-const mapDispatchToProps = dispatch => {
-  return {
-    onModalClose: () => dispatch(modalClose())
-  };
+  );
 };
 
-export default connect(null, mapDispatchToProps)(ModalCloseBtn)
+export default connect(
+  null,
+  { modalClose }
+)(ModalCloseBtn);

@@ -1,7 +1,14 @@
-import { VIDEOS_ERROR, GET_VIDEOS } from "../actions/ActionTypes";
+import {
+  VIDEOS_ERROR,
+  GET_VIDEOS,
+  GET_CATEGORY_VIDEOS,
+  RESET_CATEGORY_VIDEOS
+} from "../actions/ActionTypes";
 
 const initalState = {
   videos: [],
+  categoryVideos: [],
+  categoryLoading: true,
   loading: true,
   error: {}
 };
@@ -21,6 +28,18 @@ export default function(state = initalState, action) {
         ...state,
         error: payload,
         loading: false
+      };
+    case GET_CATEGORY_VIDEOS:
+      return {
+        ...state,
+        categoryVideos: payload,
+        categoryLoading: false
+      };
+    case RESET_CATEGORY_VIDEOS:
+      return {
+        ...state,
+        categoryLoading: true,
+        categoryVideos: []
       };
     default:
       return state;

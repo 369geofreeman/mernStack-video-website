@@ -4,22 +4,27 @@ import AwesomeSlider from "react-awesome-slider";
 import ReactPlayer from "react-player";
 import CoreStyles from "react-awesome-slider/src/core/styles.scss";
 import AnimationStyles from "react-awesome-slider/src/styled/open-animation/open-animation.scss";
-// Reduc
+import Spinner from "../../layout/PageLoadingLogo";
+// Redux
 import { currentCategoryIndex } from "../../store/actions/Index";
 // Helper functions
-import categorySelect from "../../assets/utils/categorySelect";
 import useKeyPress from "../../assets/utils/useKeyPress";
 import useWindowDimensions from "../../assets/utils/getWindowDimensions";
-// My Components
+// Components
 import VideoTitleViewAll from "../../components/VideoTitle/VIdeoTitleViewAll";
 import CategoryPlayerButtons from "./CategoryPlayerButtons";
 import "./CategoryPlayer.scss";
 
-const CategoryPlayer = props => {
-  const categorySet = categorySelect(props.vidTitle);
+const CategoryPlayer = ({
+  onResetCurrentCategoryIndex,
+  VideoIndex,
+  modalOpen,
+  vidTitle,
+  categoryVideos: { categoryVideos, categoryLoading }
+}) => {
   const { width, height } = useWindowDimensions();
-  const [videos] = useState(categorySet);
-  const [videoLen, setVidLength] = useState(0);
+  const [videos] = useState(categoryVideos);
+  const [videoLen] = useState(videos.length - 1);
   const [toggleVideoWithSpace, setToggleVideoWithSpace] = useState(true);
 
   const rightPress = useKeyPress("ArrowRight");
@@ -28,24 +33,18 @@ const CategoryPlayer = props => {
   const aPress = useKeyPress("a");
   const spacePress = useKeyPress(" ");
 
-  let { onResetCurrentCategoryIndex, VideoIndex, modalOpen } = props;
-
-  // To stop a very rare bug in slow server
-  if (!VideoIndex) VideoIndex = 0;
-
   useEffect(() => {
-    setVidLength(videos.length - 1);
     if (rightPress || dPress)
       !modalOpen &&
         onResetCurrentCategoryIndex(
           VideoIndex === videoLen ? 0 : VideoIndex + 1
         );
-    // eslint-disable-next-line
+    // eslint-disable-next-line;
   }, [
+    VideoIndex,
     rightPress,
     dPress,
     videoLen,
-    videos.length,
     onResetCurrentCategoryIndex,
     modalOpen
   ]);
@@ -70,6 +69,8 @@ const CategoryPlayer = props => {
     onResetCurrentCategoryIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
   };
 
+  let vidUrlIndexTo = VideoIndex === videoLen ? VideoIndex : VideoIndex + 1;
+  let vidUrlIndexFrom = VideoIndex === 0 ? videoLen : VideoIndex - 1;
   let slides = videos.map((slide, index) => {
     return (
       <div data-src="" key={slide.vidLink}>
@@ -77,6 +78,12 @@ const CategoryPlayer = props => {
           title={slide.title}
           category={slide.category}
           categoryTag={slide.categoryTag}
+        />
+        <CategoryPlayerButtons
+          nextIndex={nextIndex}
+          to={`/categories/${vidTitle}/${videos[vidUrlIndexTo]._id}`}
+          previousIndex={previousIndex}
+          from={`/categories/${vidTitle}/${videos[vidUrlIndexFrom]._id}`}
         />
         <ReactPlayer
           url={videos[VideoIndex].vidLink}
@@ -99,9 +106,9 @@ const CategoryPlayer = props => {
     );
   });
 
-  let vidUrlIndexTo = VideoIndex === videoLen ? VideoIndex : VideoIndex + 1;
-  let vidUrlIndexFrom = VideoIndex === 0 ? videoLen : VideoIndex - 1;
-  return (
+  return categoryLoading ? (
+    <Spinner />
+  ) : (
     <div className="catergoryPlayerContainer">
       <AwesomeSlider
         animation="openAnimation"
@@ -114,12 +121,6 @@ const CategoryPlayer = props => {
       >
         {slides}
       </AwesomeSlider>
-      <CategoryPlayerButtons
-        nextIndex={nextIndex}
-        to={`/categories/${props.vidTitle}/${videos[vidUrlIndexTo]._id}`}
-        previousIndex={previousIndex}
-        from={`/categories/${props.vidTitle}/${videos[vidUrlIndexFrom]._id}`}
-      />
     </div>
   );
 };
@@ -129,7 +130,8 @@ const mapStateToProps = state => {
   return {
     VideoIndex: state.VideoIndex.categoryIndex,
     vidTitle: state.VideoIndex.categoryTitle,
-    modalOpen: state.ModalOpen.modalOpen
+    modalOpen: state.ModalOpen.modalOpen,
+    categoryVideos: state.Videos
   };
 };
 

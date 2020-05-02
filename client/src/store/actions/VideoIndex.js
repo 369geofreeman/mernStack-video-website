@@ -19,16 +19,16 @@ export const userSavedIndex = index => {
   };
 };
 
-export const currentCategoryIndex = index => {
-  return {
+export const currentCategoryIndex = index => dispatch => {
+  dispatch({
     type: CURRENT_CATEGORY_INDEX,
     payLoad: index
-  };
+  });
 };
 
-export const categoryTitle = title => {
-  return {
+export const categoryTitle = title => dispatch => {
+  dispatch({
     type: CATEGORY_TITLE,
     payLoad: title
-  };
+  });
 };

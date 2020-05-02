@@ -4,7 +4,9 @@ import {
   GET_VIDEOS,
   VIDEOS_ERROR,
   ADD_SAVED_VID,
-  PROFILE_ERROR
+  PROFILE_ERROR,
+  GET_CATEGORY_VIDEOS,
+  RESET_CATEGORY_VIDEOS
 } from "./ActionTypes";
 import { setAlert } from "./Index";
 
@@ -54,4 +56,26 @@ export const getSelectedVideos = () => async dispatch => {
       playload: { msg: err.response.statusText, status: err.response.status }
     });
   }
+};
+
+export const getCategoryVideos = category => async dispatch => {
+  try {
+    const res = await axios.get(`/api/categories/${category}`);
+
+    dispatch({
+      type: GET_CATEGORY_VIDEOS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: VIDEOS_ERROR,
+      playload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const resetCategoryVideos = () => dispatch => {
+  dispatch({
+    type: RESET_CATEGORY_VIDEOS
+  });
 };

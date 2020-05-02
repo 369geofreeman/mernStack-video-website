@@ -3,32 +3,45 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 
-import categories from "../../assets/dummyData/caegories";
+import categories from "../../assets/utils/caegories";
 
-import { categoryTitle, currentCategoryIndex } from "../../store/actions/Index";
+import {
+  categoryTitle,
+  currentCategoryIndex,
+  getCategoryVideos,
+  resetCategoryVideos
+} from "../../store/actions/Index";
 import "./VideoTitle.css";
 
-const VideoTitle = props => {
+const VideoTitle = ({
+  getCategoryVideos,
+  categoryTag,
+  categoryTitle,
+  title,
+  category,
+  resetCategoryVideos
+}) => {
   const firstCategoryId = categories.filter(
-    cat => cat.categoryTag === props.categoryTag
+    cat => cat.categoryTag === categoryTag
   )[0].id;
 
   const setCategory = () => {
-    props.onCategoryTitle(props.categoryTag);
-    // props.onCurrentCategoryIndex(0)
+    categoryTitle(categoryTag);
+    resetCategoryVideos();
+    getCategoryVideos([...categoryTag].filter(y => y !== "_").join(""));
   };
 
   return (
     <div className="headerVideoTitle">
-      <h3>{props.title}</h3>
+      <h3>{title}</h3>
       <Link
         onClick={setCategory}
-        to={`/categories/${props.categoryTag}/${firstCategoryId}`}
+        to={`/categories/${categoryTag}/${firstCategoryId}`}
         className="categoryLinkTitle"
         data-tip
         data-for="categoryTip"
       >
-        {props.category}
+        {category}
       </Link>
       <ReactTooltip
         id="categoryTip"
@@ -40,21 +53,18 @@ const VideoTitle = props => {
         border
         multiline={false}
       >
-        {`See more from ${props.category}?`}
+        {`See more from ${category}?`}
       </ReactTooltip>
     </div>
   );
 };
 
-//  Redux
-const mapDispatchToProps = dispatch => {
-  return {
-    onCategoryTitle: title => dispatch(categoryTitle(title)),
-    onCurrentCategoryIndex: () => dispatch(currentCategoryIndex())
-  };
-};
-
 export default connect(
   null,
-  mapDispatchToProps
+  {
+    categoryTitle,
+    currentCategoryIndex,
+    getCategoryVideos,
+    resetCategoryVideos
+  }
 )(VideoTitle);

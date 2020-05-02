@@ -1,4 +1,4 @@
-.mainPageContainer{
+.mainPageContainer {
   -webkit-animation: fadein 0.8s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 0.8s; /* Firefox < 16 */
   -ms-animation: fadein 0.8s; /* Internet Explorer */
@@ -62,12 +62,13 @@
   text-decoration: none;
   text-align: center;
   transition: all 0.25s ease-out;
+  z-index: 5000;
 }
-.savedVidsArrowsRight:hover{
+.savedVidsArrowsRight:hover {
   transform: scaleY(1.7);
-  color: #fff
+  color: #fff;
 }
-.savedVidsArrowsRight::after{
+.savedVidsArrowsRight::after {
   transform: scaleY(1);
 }
 
@@ -82,11 +83,12 @@
   text-decoration: none;
   text-align: center;
   transition: all 0.25s ease-out;
+  z-index: 5000;
 }
-.savedVidsArrowsLeft:hover{
-  transform: scaleY(1.7);;
-  color: #fff
+.savedVidsArrowsLeft:hover {
+  transform: scaleY(1.7);
+  color: #fff;
 }
-.savedVidsArrowsLeft::after{
+.savedVidsArrowsLeft::after {
   transform: scaleY(1);
 }

@@ -1,20 +1,20 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
-import { modalOpen } from '../../store/actions/Index'
+import { modalOpen } from "../../store/actions/Index";
 import "./ModalOpenBtn.scss";
 
-const ModalOpenBtn = props => {
+const ModalOpenBtn = ({ modalOpen, open }) => {
   let location = useLocation();
 
   return (
     <Link
       to={{ pathname: "/categories", state: { background: location } }}
       className="HamburgerContainer"
-      onClick={() => props.onModalOpen()}
+      onClick={() => modalOpen()}
     >
-      <div className="Hamburger" onClick={props.open}>
+      <div className="Hamburger" onClick={open}>
         <b></b>
         <b></b>
         <b></b>
@@ -23,11 +23,7 @@ const ModalOpenBtn = props => {
   );
 };
 
-//  Redux mapping
-const mapDispatchToProps = dispatch => {
-  return {
-    onModalOpen: () => dispatch(modalOpen())
-  };
-};
-
-export default connect(null, mapDispatchToProps)(ModalOpenBtn);
+export default connect(
+  null,
+  { modalOpen }
+)(ModalOpenBtn);

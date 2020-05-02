@@ -5,24 +5,26 @@ import CoreStyles from "react-awesome-slider/src/core/styles.scss";
 import AnimationStyles from "react-awesome-slider/src/styled/open-animation/open-animation.scss";
 import { connect } from "react-redux";
 
-// MyComponenets
+// Componenets
 import HomePageButtons from "./HomePageButtons";
 import VideoTitle from "../../components/VideoTitle/VideoTitle";
-// Redux vars
+// Redux
 import { currentIndex } from "../../store/actions/Index";
-// Dummy data ( DUMMY_DATA_NSFW )
-// import { DUMMY_DATA_SFW as DUMMY_DATA } from "../../assets/dummyData/videos";
-import jData from "../../assets/dummyData/categoryVids/AllCategories.json";
 // Helper functions
 import useKeyPress from "../../assets/utils/useKeyPress";
 import useWindowDimensions from "../../assets/utils/getWindowDimensions";
 // Styles
 import "./HomePage.scss";
 
-const HomePage = ({ currentIndex, currentVideos, VideoIndex, modalOpen }) => {
+const HomePage = ({
+  currentIndex,
+  currentVideos: { videos },
+  VideoIndex,
+  modalOpen
+}) => {
   const { height, width } = useWindowDimensions();
-  const [videos] = useState(jData); // Use jData for now
-  const [videoLen] = useState(videos.length - 1);
+  const [clips] = useState(videos);
+  const [videoLen] = useState(clips.length - 1);
   const [toggleVideoWithSpace, setToggleVideoWithSpace] = useState(true);
 
   const rightPress = useKeyPress("ArrowRight");
@@ -32,19 +34,13 @@ const HomePage = ({ currentIndex, currentVideos, VideoIndex, modalOpen }) => {
   const spacePress = useKeyPress(" ");
 
   // Set the Video index from URL
-  // let VideoIndex = 0;
-  // if (window.location.href.split("/")[3]) {
-  //   for (let i = 0; i < videos.length; i++) {
-  //     if (videos[i]._id === +window.location.href.split("/")[3]) VideoIndex = i;
-  //   }
-  // } else {
-  //   VideoIndex = VideoIndexRedux;
-  // }
-
-  // Get Videos
-  // useEffect(() => {
-  //   setVideos(currentVideos);
-  // }, []);
+  if (window.location.href.split("/")[3]) {
+    for (let i = 0; i < clips.length; i++) {
+      if (clips[i]._id === +window.location.href.split("/")[3]) {
+        VideoIndex = i;
+      }
+    }
+  }
 
   // Assign keybord to video controlls
   useEffect(() => {
@@ -74,7 +70,10 @@ const HomePage = ({ currentIndex, currentVideos, VideoIndex, modalOpen }) => {
     currentIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
   };
 
-  let slides = videos.map((slide, index) => {
+  let vidUrlIndexTo = VideoIndex === videoLen ? VideoIndex : VideoIndex + 1;
+  let vidUrlIndexFrom = VideoIndex === 0 ? videoLen : VideoIndex - 1;
+
+  let slides = clips.map((slide, index) => {
     return (
       <div data-src="" key={slide.vidLink}>
         <VideoTitle
@@ -82,8 +81,14 @@ const HomePage = ({ currentIndex, currentVideos, VideoIndex, modalOpen }) => {
           category={slide.category}
           categoryTag={slide.categoryTag}
         />
+        <HomePageButtons
+          nextIndex={nextIndex}
+          to={`/${clips[vidUrlIndexTo]._id}`}
+          previousIndex={previousIndex}
+          from={`/${clips[vidUrlIndexFrom]._id}`}
+        />
         <ReactPlayer
-          url={videos[VideoIndex].vidLink}
+          url={clips[VideoIndex].vidLink}
           playing={toggleVideoWithSpace}
           loop
           controls
@@ -103,8 +108,6 @@ const HomePage = ({ currentIndex, currentVideos, VideoIndex, modalOpen }) => {
     );
   });
 
-  let vidUrlIndexTo = VideoIndex === videoLen ? VideoIndex : VideoIndex + 1;
-  let vidUrlIndexFrom = VideoIndex === 0 ? videoLen : VideoIndex - 1;
   return (
     <div className="mainPageContainer">
       <AwesomeSlider
@@ -118,12 +121,6 @@ const HomePage = ({ currentIndex, currentVideos, VideoIndex, modalOpen }) => {
       >
         {slides}
       </AwesomeSlider>
-      <HomePageButtons
-        nextIndex={nextIndex}
-        to={`/${videos[vidUrlIndexTo]._id}`} // USE .id
-        previousIndex={previousIndex}
-        from={`/${videos[vidUrlIndexFrom]._id}`}
-      />
     </div>
   );
 };
@@ -134,7 +131,7 @@ const mapStateToProps = state => {
     VideoIndex: state.VideoIndex.currentIndex,
     modalOpen: state.ModalOpen.modalOpen,
     loading: state.Videos.loading,
-    currentVideos: state.Videos.videos
+    currentVideos: state.Videos
   };
 };
 

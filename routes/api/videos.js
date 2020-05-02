@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
+module.exports = router;
 const auth = require("../../middleware/auth");
 
 const Video = require("../../models/Video");
-
-// Build a GET request for each category in the database
 
 // @route:   GET api/videos
 // @desc:    Get all videos
@@ -19,5 +18,3 @@ router.get("/", async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-module.exports = router;

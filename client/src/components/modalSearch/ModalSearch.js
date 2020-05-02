@@ -2,13 +2,25 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { categoryTitle, currentCategoryIndex, modalClose } from "../../store/actions/Index";
+import {
+  categoryTitle,
+  currentCategoryIndex,
+  modalClose,
+  getCategoryVideos,
+  resetCategoryVideos
+} from "../../store/actions/Index";
 
 // DUMMY DATA
-import categories from "../../assets/dummyData/caegories";
+import categories from "../../assets/utils/caegories";
 import "./ModalSearch.scss";
 
-const ModalSearch = props => {
+const ModalSearch = ({
+  categoryTitle,
+  currentCategoryIndex,
+  modalClose,
+  getCategoryVideos,
+  resetCategoryVideos
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -25,9 +37,11 @@ const ModalSearch = props => {
   }, [searchTerm]);
 
   const setSearchAndClose = item => {
-    props.onCategoryTitle(item);
-    props.onCurrentCategoryIndex(0);
-    props.onModalClose()
+    resetCategoryVideos();
+    categoryTitle(item);
+    currentCategoryIndex(0);
+    getCategoryVideos([...item].filter(y => y !== "_").join(""));
+    modalClose();
   };
 
   return (
@@ -56,7 +70,7 @@ const ModalSearch = props => {
           <li className={"block-" + index} key={item.id}>
             <Link
               style={{ textDecoration: "none" }}
-              to={`/categories/${item.categoryTag}/${item.id}`}
+              to={`/categories/${item.categoryTag}/js`}
               onClick={() => setSearchAndClose(item.categoryTag)}
             >
               <div className="title">
@@ -73,18 +87,15 @@ const ModalSearch = props => {
   );
 };
 
-//  Redux mapping
-const mapDispatchToProps = dispatch => {
-  return {
-    onCategoryTitle: title => dispatch(categoryTitle(title)),
-    onCurrentCategoryIndex: index => dispatch(currentCategoryIndex(index)),
-    onModalClose: () => dispatch(modalClose())
-  };
-};
-
 export default connect(
   null,
-  mapDispatchToProps
+  {
+    categoryTitle,
+    currentCategoryIndex,
+    modalClose,
+    getCategoryVideos,
+    resetCategoryVideos
+  }
 )(ModalSearch);
 
 // https://codesandbox.io/s/5yro4pql44

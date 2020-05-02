@@ -8,7 +8,12 @@ export { getCurrentProfile, createProfile, deleteAccount } from "./Profile";
 export { setAlert } from "./alert";
 
 // Get videos || This will be a list of every category
-export { getSelectedVideos, addSavedVid } from "./Videos";
+export {
+  getSelectedVideos,
+  addSavedVid,
+  getCategoryVideos,
+  resetCategoryVideos
+} from "./Videos";
 
 // Video Index
 export {
