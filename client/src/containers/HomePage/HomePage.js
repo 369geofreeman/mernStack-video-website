@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 // Componenets
 import HomePageButtons from "./HomePageButtons";
 import VideoTitle from "../../components/VideoTitle/VideoTitle";
+import PageLoadingLogo from "../../layout/PageLoadingLogo";
 // Redux
 import { currentIndex } from "../../store/actions/Index";
 // Helper functions
@@ -20,7 +21,8 @@ const HomePage = ({
   currentIndex,
   currentVideos: { videos },
   VideoIndex,
-  modalOpen
+  modalOpen,
+  loading,
 }) => {
   const { height, width } = useWindowDimensions();
   const [clips] = useState(videos);
@@ -57,7 +59,7 @@ const HomePage = ({
   }, [leftPress, aPress, videoLen, currentIndex, modalOpen]);
   useEffect(() => {
     if (spacePress) {
-      !modalOpen && setToggleVideoWithSpace(prevState => !prevState);
+      !modalOpen && setToggleVideoWithSpace((prevState) => !prevState);
     }
   }, [spacePress, modalOpen]);
 
@@ -83,9 +85,9 @@ const HomePage = ({
         />
         <HomePageButtons
           nextIndex={nextIndex}
-          to={`/${clips[vidUrlIndexTo]._id}`}
+          to={`/play/${clips[vidUrlIndexTo]._id}`}
           previousIndex={previousIndex}
-          from={`/${clips[vidUrlIndexFrom]._id}`}
+          from={`/play/${clips[vidUrlIndexFrom]._id}`}
         />
         <ReactPlayer
           url={clips[VideoIndex].vidLink}
@@ -97,9 +99,10 @@ const HomePage = ({
           config={{
             file: {
               attributes: {
-                controlsList: "nodownload"
-              }
-            }
+                controlsList: "nodownload",
+                disablepictureinpicture: "true",
+              },
+            },
           }}
           width={width}
           height={height}
@@ -108,7 +111,9 @@ const HomePage = ({
     );
   });
 
-  return (
+  return loading ? (
+    <PageLoadingLogo />
+  ) : (
     <div className="mainPageContainer">
       <AwesomeSlider
         animation="openAnimation"
@@ -118,6 +123,7 @@ const HomePage = ({
         style={{ backgroundColor: "#000" }}
         buttons={false}
         selected={VideoIndex}
+        mobileTouch={false}
       >
         {slides}
       </AwesomeSlider>
@@ -125,17 +131,14 @@ const HomePage = ({
   );
 };
 
-//  Redux mapping
-const mapStateToProps = state => {
+//  Redux
+const mapStateToProps = (state) => {
   return {
     VideoIndex: state.VideoIndex.currentIndex,
     modalOpen: state.ModalOpen.modalOpen,
     loading: state.Videos.loading,
-    currentVideos: state.Videos
+    currentVideos: state.Videos,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { currentIndex }
-)(HomePage);
+export default connect(mapStateToProps, { currentIndex })(HomePage);

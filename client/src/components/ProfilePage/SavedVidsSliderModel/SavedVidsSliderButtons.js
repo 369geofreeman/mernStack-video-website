@@ -2,20 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Lottie from "react-lottie";
-import * as animationData from "../../../assets/logos/lf20_XElJDo.json";
+import * as animationData from "../../../assets/logos/logo-animated.json";
 
 import { userSavedIndex, currentIndex } from "../../../store/actions/Index";
 
 import "./SavedVidsSliderModal.scss";
+import "../../Logo/Logo.scss";
 
-const SavedVidsSliderButtons = props => {
+const SavedVidsSliderButtons = (props) => {
   const defaultOptions = {
     loop: false,
-    // autoplay: true,
     animationData: animationData.default,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
-    }
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
 
   const resetIndex = () => {
@@ -26,12 +26,7 @@ const SavedVidsSliderButtons = props => {
   return (
     <div>
       <Link to="/" className="userModalLogo">
-        <Lottie
-          options={defaultOptions}
-          height={80}
-          width={220}
-          onClick={resetIndex}
-        />
+        <Lottie options={defaultOptions} onClick={resetIndex} />
       </Link>
       <Link className="userModalCloseContainer" to={`/${"u2"}/profile`}>
         <img
@@ -61,14 +56,11 @@ const SavedVidsSliderButtons = props => {
 };
 
 // Redux
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onResetUserSavedIndex: index => dispatch(userSavedIndex(index)),
-    onCurrentIndex: index => dispatch(currentIndex(index))
+    onResetUserSavedIndex: (index) => dispatch(userSavedIndex(index)),
+    onCurrentIndex: (index) => dispatch(currentIndex(index)),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SavedVidsSliderButtons);
+export default connect(null, mapDispatchToProps)(SavedVidsSliderButtons);

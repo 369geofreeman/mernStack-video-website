@@ -1,7 +1,8 @@
-.toggleSignInContainer{
+.toggleSignInContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-left: 0em;
 }
 .toggleSignInBtns {
   padding: 5% 10%;
@@ -12,8 +13,8 @@
   text-align: center;
   cursor: pointer;
 }
-.toggleSignInBtns:hover{
-  background-color: tomato
+.toggleSignInBtns:hover {
+  background-color: tomato;
 }
 .toggleSignInBtnsAfter {
   padding: 5% 10%;
@@ -23,3 +24,52 @@
   width: 100%;
   text-align: center;
 }
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  @media (orientation: landscape) {
+    .toggleSignInContainer {
+      margin-left: 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .toggleSignInContainer {
+      margin-left: 1em;
+    }
+  }
+}
+@media only screen and (min-width: 600px) {
+  @media (orientation: landscape) {
+    .toggleSignInContainer {
+      margin-left: 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .toggleSignInContainer {
+      margin-left: 2em;
+    }
+  }
+}
+@media only screen and (min-width: 768px) {
+  @media (orientation: landscape) {
+    .toggleSignInContainer {
+      margin-left: 2em;
+    }
+  }
+  @media (orientation: portrait) {
+    .toggleSignInContainer {
+      margin-left: 3em;
+    }
+  }
+}
+
+// /* Small devices (portrait tablets and large phones, 600px and up) */
+// @media only screen and (min-width: 600px) {...}
+
+// /* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {...}
+
+// /* Large devices (laptops/desktops, 992px and up) */
+// @media only screen and (min-width: 992px) {...}
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+// @media only screen and (min-width: 1200px) {...}

@@ -1,0 +1,203 @@
+.mobileSideMenuContainer {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  @media (orientation: landscape) {
+    .mobileSideMenuContainer {
+      display: inline-block;
+      margin-top: 5em;
+      list-style-type: none;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .mobileSideMenuContainer {
+      display: inline-block;
+      margin-top: 5em;
+      list-style-type: none;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 0.75em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media (min-width: 600px) {
+  @media (orientation: landscape) {
+    .mobileSideMenuContainer {
+      display: inline-block;
+      margin-top: 5em;
+      list-style-type: none;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .mobileSideMenuContainer {
+      display: inline-block;
+      margin-top: 5em;
+      list-style-type: none;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 0.75em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media (min-width: 768px) {
+  @media (orientation: landscape) {
+    .mobileSideMenuContainer {
+      display: inline-block;
+      margin-top: 7em;
+      list-style-type: none;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .mobileSideMenuContainer {
+      display: inline-block;
+      margin-top: 7em;
+      list-style-type: none;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) {
+  @media (orientation: landscape) {
+    .mobileSideMenuContainer {
+      display: none;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .mobileSideMenuContainer {
+      display: inline-block;
+      margin-top: 9em;
+      list-style-type: none;
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
+    }
+    .mobileSideMenuTitles {
+      display: inline;
+    }
+    .mobileMenuTitle {
+      text-decoration: none;
+      list-style: none;
+      color: #fff;
+      font-size: 2em;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+}

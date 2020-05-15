@@ -4,7 +4,7 @@ import AwesomeSlider from "react-awesome-slider";
 import ReactPlayer from "react-player";
 import CoreStyles from "react-awesome-slider/src/core/styles.scss";
 import AnimationStyles from "react-awesome-slider/src/styled/open-animation/open-animation.scss";
-import Spinner from "../../layout/PageLoadingLogo";
+import PageLoadingLogo from "../../layout/PageLoadingLogo";
 // Redux
 import { currentCategoryIndex } from "../../store/actions/Index";
 // Helper functions
@@ -16,7 +16,7 @@ import CategoryPlayerButtons from "./CategoryPlayerButtons";
 import "./CategoryPlayer.scss";
 
 const CategoryPlayer = ({
-  onResetCurrentCategoryIndex,
+  currentCategoryIndex,
   VideoIndex,
   modalOpen,
   vidTitle,
@@ -36,37 +36,33 @@ const CategoryPlayer = ({
   useEffect(() => {
     if (rightPress || dPress)
       !modalOpen &&
-        onResetCurrentCategoryIndex(
-          VideoIndex === videoLen ? 0 : VideoIndex + 1
-        );
+        currentCategoryIndex(VideoIndex === videoLen ? 0 : VideoIndex + 1);
     // eslint-disable-next-line;
   }, [
     VideoIndex,
     rightPress,
     dPress,
     videoLen,
-    onResetCurrentCategoryIndex,
+    currentCategoryIndex,
     modalOpen
   ]);
   useEffect(() => {
     if (leftPress || aPress)
       !modalOpen &&
-        onResetCurrentCategoryIndex(
-          VideoIndex === 0 ? videoLen : VideoIndex - 1
-        );
+        currentCategoryIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
     // eslint-disable-next-line
-  }, [leftPress, aPress, videoLen, onResetCurrentCategoryIndex, modalOpen]);
+  }, [leftPress, aPress, videoLen, currentCategoryIndex, modalOpen]);
   useEffect(() => {
     if (spacePress)
       !modalOpen && setToggleVideoWithSpace(prevState => !prevState);
   }, [spacePress, modalOpen]);
 
   const nextIndex = () => {
-    onResetCurrentCategoryIndex(VideoIndex === videoLen ? 0 : VideoIndex + 1);
+    currentCategoryIndex(VideoIndex === videoLen ? 0 : VideoIndex + 1);
   };
 
   const previousIndex = () => {
-    onResetCurrentCategoryIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
+    currentCategoryIndex(VideoIndex === 0 ? videoLen : VideoIndex - 1);
   };
 
   let vidUrlIndexTo = VideoIndex === videoLen ? VideoIndex : VideoIndex + 1;
@@ -95,7 +91,8 @@ const CategoryPlayer = ({
           config={{
             file: {
               attributes: {
-                controlsList: "nodownload"
+                controlsList: "nodownload",
+                disablepictureinpicture: "true"
               }
             }
           }}
@@ -107,7 +104,7 @@ const CategoryPlayer = ({
   });
 
   return categoryLoading ? (
-    <Spinner />
+    <PageLoadingLogo />
   ) : (
     <div className="catergoryPlayerContainer">
       <AwesomeSlider
@@ -118,6 +115,7 @@ const CategoryPlayer = ({
         style={{ backgroundColor: "#000" }}
         buttons={false}
         selected={VideoIndex}
+        mobileTouch={false}
       >
         {slides}
       </AwesomeSlider>
@@ -135,13 +133,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onResetCurrentCategoryIndex: index => dispatch(currentCategoryIndex(index))
-  };
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { currentCategoryIndex }
 )(CategoryPlayer);

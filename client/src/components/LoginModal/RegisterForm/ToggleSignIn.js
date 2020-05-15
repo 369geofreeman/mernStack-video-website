@@ -8,7 +8,7 @@ const ToggleSignIn = () => {
   const [toggleSignIn, setToggleSignIn] = useState(true);
 
   const toggleSwitch = () => {
-    setToggleSignIn(prevState => !prevState);
+    setToggleSignIn((prevState) => !prevState);
   };
 
   return (
@@ -29,7 +29,11 @@ const ToggleSignIn = () => {
           <div className="toggleSignInBtnsAfter">Signup</div>
         )}
       </div>
-      {toggleSignIn ? <SignInForm /> : <RegisterForm />}
+      {toggleSignIn ? (
+        <SignInForm showChangePassword={true} />
+      ) : (
+        <RegisterForm />
+      )}
     </div>
   );
 };

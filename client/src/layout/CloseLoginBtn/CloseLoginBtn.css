@@ -1,0 +1,30 @@
+.closeLoginBtn {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  @media (orientation: landscape) {
+    .closeLoginBtn {
+      display: -webkit-box;
+      position: absolute;
+      top: 0.3em;
+      right: 0.5em;
+      color: #333;
+      font-weight: bold;
+      font-size: 2em;
+      z-index: 5000;
+    }
+  }
+  @media (orientation: portrait) {
+    .closeLoginBtn {
+      display: -webkit-box;
+      position: absolute;
+      top: 0.3em;
+      right: 0.5em;
+      color: #333;
+      font-weight: bold;
+      font-size: 2em;
+      z-index: 5000;
+    }
+  }
+}

@@ -7,10 +7,11 @@ export { getCurrentProfile, createProfile, deleteAccount } from "./Profile";
 // Alerts
 export { setAlert } from "./alert";
 
-// Get videos || This will be a list of every category
+// Videos
 export {
   getSelectedVideos,
   addSavedVid,
+  delSavedVid,
   getCategoryVideos,
   resetCategoryVideos
 } from "./Videos";

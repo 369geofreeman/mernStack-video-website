@@ -2,6 +2,7 @@
   justify-content: flex-start;
   align-items: center;
   padding: 0 5em 2em 5em;
+  text-align: center;
 }
 
 .registerFormEmail {
@@ -26,9 +27,9 @@
   outline-width: 0;
 }
 .signinHelperText {
-  font-weight: 400
+  font-weight: 400;
 }
-.loginFormError{
+.loginFormError {
   color: red;
-  padding: 1% 0
+  padding: 1% 0;
 }

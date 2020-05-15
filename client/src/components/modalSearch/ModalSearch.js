@@ -7,10 +7,9 @@ import {
   currentCategoryIndex,
   modalClose,
   getCategoryVideos,
-  resetCategoryVideos
+  resetCategoryVideos,
 } from "../../store/actions/Index";
 
-// DUMMY DATA
 import categories from "../../assets/utils/caegories";
 import "./ModalSearch.scss";
 
@@ -19,28 +18,28 @@ const ModalSearch = ({
   currentCategoryIndex,
   modalClose,
   getCategoryVideos,
-  resetCategoryVideos
+  resetCategoryVideos,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleChange = e => {
-    e.preventDefault();
-    setSearchTerm(e.target.value);
-  };
-
   useEffect(() => {
-    const results = categories.filter(cat =>
+    const results = categories.filter((cat) =>
       cat.title.toLowerCase().includes(searchTerm)
     );
     setSearchResults(results);
   }, [searchTerm]);
 
-  const setSearchAndClose = item => {
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchTerm(e.target.value);
+  };
+
+  const setSearchAndClose = (item) => {
     resetCategoryVideos();
     categoryTitle(item);
     currentCategoryIndex(0);
-    getCategoryVideos([...item].filter(y => y !== "_").join(""));
+    getCategoryVideos([...item].filter((y) => y !== "_").join(""));
     modalClose();
   };
 
@@ -50,7 +49,7 @@ const ModalSearch = ({
         <form
           id="searchform"
           className="searchform"
-          onSubmit={e => e.preventDefault()}
+          onSubmit={(e) => e.preventDefault()}
         >
           <input
             type="search"
@@ -74,7 +73,7 @@ const ModalSearch = ({
               onClick={() => setSearchAndClose(item.categoryTag)}
             >
               <div className="title">
-                <h3 className="categoryTitle">{item.title}++</h3>
+                <h3 className="categoryTitle">{item.title}</h3>
               </div>
               <div className="link">
                 <h3 className="categoryTagLine">{item.tagLine}</h3>
@@ -87,15 +86,10 @@ const ModalSearch = ({
   );
 };
 
-export default connect(
-  null,
-  {
-    categoryTitle,
-    currentCategoryIndex,
-    modalClose,
-    getCategoryVideos,
-    resetCategoryVideos
-  }
-)(ModalSearch);
-
-// https://codesandbox.io/s/5yro4pql44
+export default connect(null, {
+  categoryTitle,
+  currentCategoryIndex,
+  modalClose,
+  getCategoryVideos,
+  resetCategoryVideos,
+})(ModalSearch);

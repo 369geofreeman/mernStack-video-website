@@ -2,19 +2,24 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { categoryTitle } from "../../../store/actions/Index";
+import {
+  categoryTitle,
+  currentCategoryIndex,
+  getCategoryVideos,
+  resetCategoryVideos
+} from "../../../store/actions/Index";
 
 import categories from "../../../assets/utils/caegories";
 import "./Categories.scss";
 
-const Categories = props => {
+const Categories = ({
+  categoryTitle,
+  currentCategoryIndex,
+  getCategoryVideos,
+  resetCategoryVideos
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
-  const handleChange = e => {
-    e.preventDefault();
-    setSearchTerm(e.target.value);
-  };
 
   useEffect(() => {
     const results = categories.filter(cat =>
@@ -22,6 +27,18 @@ const Categories = props => {
     );
     setSearchResults(results);
   }, [searchTerm]);
+
+  const handleChange = e => {
+    e.preventDefault();
+    setSearchTerm(e.target.value);
+  };
+
+  const setSearchAndClose = item => {
+    resetCategoryVideos();
+    categoryTitle(item);
+    currentCategoryIndex(0);
+    getCategoryVideos([...item].filter(y => y !== "_").join(""));
+  };
 
   return (
     <div className="profileCategoriesContainer">
@@ -48,8 +65,8 @@ const Categories = props => {
           <li className={"block-" + index} key={item.id}>
             <Link
               style={{ textDecoration: "none" }}
-              onClick={() => props.onCategoryTitle(item.categoryTag)}
-              to={`/categories/${item.categoryTag}/${item.id}`}
+              to={`/categories/${item.categoryTag}/js`}
+              onClick={() => setSearchAndClose(item.categoryTag)}
             >
               <div className="title">
                 <h3 className="categoryTitle">{item.title}</h3>
@@ -65,14 +82,12 @@ const Categories = props => {
   );
 };
 
-//  Redux mapping
-const mapDispatchToProps = dispatch => {
-  return {
-    onCategoryTitle: title => dispatch(categoryTitle(title))
-  };
-};
-
 export default connect(
   null,
-  mapDispatchToProps
+  {
+    categoryTitle,
+    currentCategoryIndex,
+    getCategoryVideos,
+    resetCategoryVideos
+  }
 )(Categories);

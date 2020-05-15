@@ -24,10 +24,7 @@ const SideMenu = ({ logout }) => {
             My Collection
           </NavLink>
         </li>
-        <li className="sideMenuTitles">
-          Upload
-          {/* <NavLink>Upload</NavLink> */}
-        </li>
+
         <li className="sideMenuTitles">
           <NavLink
             exact={true}
@@ -52,7 +49,7 @@ const SideMenu = ({ logout }) => {
         </li>
         <li
           onClick={() =>
-            window.confirm("Are you sure you wish to dlog out?") && logout()
+            window.confirm("Are you sure you wish to log out?") && logout()
           }
           className="sideMenuTitles"
         >
@@ -63,10 +60,4 @@ const SideMenu = ({ logout }) => {
   );
 };
 
-// https://codesandbox.io/s/vq823o4947 MOBILE VIEW ANIMATION
-// https://codesandbox.io/s/p9v05k68oq Nested routes
-
-export default connect(
-  null,
-  { logout }
-)(SideMenu);
+export default connect(null, { logout })(SideMenu);

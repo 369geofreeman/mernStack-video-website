@@ -28,6 +28,7 @@
 }
 .registerModalBodyContainer {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-content: center;
 }
@@ -36,7 +37,7 @@
 .formBtnContainer {
   width: 100%;
   background-color: rgb(250, 60, 26);
-  margin-top: 0.5em;
+  margin-top: 5vh;
 }
 .formBtnContainer:hover {
   background-color: tomato;
@@ -54,4 +55,112 @@
 }
 .submitBtn:focus {
   outline-width: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  @media (orientation: landscape) {
+    .registerModalContainer {
+      top: -25em;
+      left: 0px;
+      width: 100%;
+    }
+    .registerModalBodyContainer {
+      display: block;
+      flex-direction: row-reverse;
+    }
+  }
+  @media (orientation: portrait) {
+    .registerModalContainer {
+      top: -25em;
+      left: 0em;
+      width: 100%;
+    }
+    .registerModalBodyContainer {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  @media (orientation: landscape) {
+    .registerModalContainer {
+      top: -25em;
+      left: 0px;
+      width: 100%;
+    }
+    .registerModalBodyContainer {
+      display: block;
+      flex-direction: row;
+    }
+  }
+  @media (orientation: portrait) {
+    .registerModalContainer {
+      top: -22em;
+      left: 0em;
+      width: 100%;
+    }
+    .registerModalBodyContainer {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  @media (orientation: landscape) {
+    .registerModalContainer {
+      top: -25em;
+      left: 0px;
+      width: 100%;
+    }
+    .registerModalBodyContainer {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  }
+  @media (orientation: portrait) {
+    .registerModalContainer {
+      top: -22em;
+      left: 10vw;
+      width: 80vw;
+    }
+    .registerModalBodyContainer {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  @media (orientation: landscape) {
+    .registerModalContainer {
+      top: -20em;
+      left: 17vw;
+      width: 70vw;
+    }
+  }
+  @media (orientation: portrait) {
+    .registerModalContainer {
+      top: -22em;
+      left: 10vw;
+      width: 80vw;
+    }
+    .registerModalBodyContainer {
+      flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .registerModalContainer {
+    position: absolute;
+    background: "#fff";
+    width: 48vw;
+    top: -20em;
+    left: 24vw;
+    background-color: #fff;
+    z-index: 101;
+    transform: translateY(25em);
+    transition: all 0.3s ease-in-out;
+    border-bottom: 2em solid rgb(250, 60, 26);
+    padding-bottom: 1em;
+  }
 }

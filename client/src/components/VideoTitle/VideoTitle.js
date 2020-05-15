@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
-
+// Components
 import categories from "../../assets/utils/caegories";
-
+// Redux
 import {
   categoryTitle,
   currentCategoryIndex,
@@ -19,7 +19,8 @@ const VideoTitle = ({
   categoryTitle,
   title,
   category,
-  resetCategoryVideos
+  resetCategoryVideos,
+  currentCategoryIndex
 }) => {
   const firstCategoryId = categories.filter(
     cat => cat.categoryTag === categoryTag
@@ -28,6 +29,7 @@ const VideoTitle = ({
   const setCategory = () => {
     categoryTitle(categoryTag);
     resetCategoryVideos();
+    currentCategoryIndex(0);
     getCategoryVideos([...categoryTag].filter(y => y !== "_").join(""));
   };
 

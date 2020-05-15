@@ -13,25 +13,27 @@ const SavedVidsContainer = ({ auth: { user, loading } }) => {
   ) : user.savedVids.length === 0 ? (
     <NoSavedVidsMessage />
   ) : (
-    <ul className="thumnNailContainer">
-      {user.savedVids.map((vid, index) => {
-        return (
-          <SavedVids
-            key={vid.id}
-            id={vid.id}
-            thumb={vid.thumbNail}
-            title={vid.title}
-            index={index}
-          />
-        );
-      })}
-      <NoSavedVidsMessage />
-    </ul>
+    <>
+      <ul className="thumnNailContainer">
+        {user.savedVids.map((vid, index) => {
+          return (
+            <SavedVids
+              key={index}
+              _id={vid._id}
+              thumb={vid.thumbNail}
+              title={vid.title}
+              index={index}
+            />
+          );
+        })}
+        <div className="nosavedVidsHandler"></div>
+      </ul>
+    </>
   );
 };
 
-const mapStateToProps = state => ({
-  auth: state.Authenticate
+const mapStateToProps = (state) => ({
+  auth: state.Authenticate,
 });
 
 export default connect(mapStateToProps)(SavedVidsContainer);

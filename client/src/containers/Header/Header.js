@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-
-// my components
-import ModalOpenBtn from "../../components/ModalOpenBtn/ModalOpenBtn";
+// Components
+import ModalOpenBtn from "../../layout/ModalOpenBtn/ModalOpenBtn";
 import Logo from "../../components/Logo/Logo";
 import LoggedInNav from "../../components/LoggedInNavState/LoggedInNav";
 import LoggedOutNav from "../../components/LoggedInNavState/LoggedOutNav";
@@ -11,11 +10,11 @@ import "./Header.scss";
 // Redux
 import { currentIndex } from "../../store/actions/Index";
 
-const Header = props => {
+const Header = ({ isLoggedIn, onResetCurrentIndex }) => {
   let location = useLocation();
 
   const resetIndex = () => {
-    props.onResetCurrentIndex(0);
+    onResetCurrentIndex(0);
   };
 
   return (
@@ -26,7 +25,7 @@ const Header = props => {
       </Link>
 
       <div className="headerRightSideContainer">
-        {props.isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
+        {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
         {location.pathname.match("/profile/categories") ? null : (
           <ModalOpenBtn />
         )}

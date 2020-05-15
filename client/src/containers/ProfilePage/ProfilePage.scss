@@ -54,13 +54,21 @@
     opacity: 1;
   }
 }
+.profilePageAlertContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
 
 .profilePagetext {
   margin-top: 15%;
   font-size: 300%;
   text-align: center;
+  color: #fff;
 }
 .sideMenuOuterContainer {
+  display: block;
   width: 15%;
   padding-top: 5em;
 }
@@ -72,4 +80,172 @@
   // align-items: center;
   flex-wrap: wrap;
   margin: 1em;
+}
+.profileHeaderBlock {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 10vh;
+  background-color: #000;
+  z-index: 10;
+}
+
+@media (max-width: 600px) {
+  @media (orientation: landscape) {
+    .sideMenuOuterContainer {
+      display: none;
+    }
+    .profilePageContainer {
+      padding: 0 0em;
+      justify-content: center;
+    }
+    .thumnNailContainer {
+      padding: 9vh 0 3em 2vw;
+      // justify-content: center;
+      margin: 0;
+      width: 100%;
+    }
+    .profileHeaderBlock {
+      display: block;
+      height: 15vh;
+    }
+  }
+  @media (orientation: portrait) {
+    .sideMenuOuterContainer {
+      display: none;
+    }
+    .profilePageContainer {
+      padding: 0 1em;
+      justify-content: center;
+    }
+    .thumnNailContainer {
+      padding-top: 2em;
+      justify-content: center;
+      margin: 0;
+    }
+    .profileHeaderBlock {
+      display: block;
+      height: 7vh;
+    }
+  }
+}
+// /* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  @media (orientation: landscape) {
+    .sideMenuOuterContainer {
+      display: none;
+    }
+    .profilePageContainer {
+      padding: 0 0em;
+      justify-content: center;
+    }
+    .thumnNailContainer {
+      padding: 9vh 0 0em 2vw;
+      // justify-content: center;
+      margin: 0;
+      width: 100%;
+    }
+    .profileHeaderBlock {
+      height: 15vh;
+    }
+  }
+  @media (orientation: portrait) {
+    .sideMenuOuterContainer {
+      display: none;
+    }
+    .profilePageContainer {
+      padding: 0 1em;
+      justify-content: center;
+    }
+    .thumnNailContainer {
+      padding-top: 2em;
+      // justify-content: center;
+      margin: 0;
+    }
+    .profileHeaderBlock {
+      display: block;
+      height: 7vh;
+    }
+  }
+}
+
+// /* Medium devices (landscape tablets, 768px and up) */
+// @media only screen and (min-width: 768px) {...}
+
+// /* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  @media (orientation: landscape) {
+    .sideMenuOuterContainer {
+      display: block;
+      width: 15%;
+      padding-top: 5em;
+      margin: 10vh 0 0 3vw;
+    }
+    .profilePageContainer {
+      padding: 0 0em;
+      justify-content: center;
+    }
+    .thumnNailContainer {
+      padding: 15vh 0 3em 10vw;
+      // justify-content: center;
+      margin: 0;
+      width: 100%;
+    }
+    .profileHeaderBlock {
+      display: none;
+    }
+  }
+  @media (orientation: portrait) {
+    .sideMenuOuterContainer {
+      display: none;
+    }
+    .profilePageContainer {
+      padding: 0 1em;
+      // justify-content: center;
+    }
+    .thumnNailContainer {
+      padding-top: 5em;
+      width: 85vw;
+      display: flex;
+      justify-content: baseline;
+      // align-items: center;
+      flex-wrap: wrap;
+      margin: 1em;
+    }
+    .profileHeaderBlock {
+      display: block;
+      height: 7vh;
+    }
+  }
+}
+
+// /* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .profilePagetext {
+    margin-top: 15%;
+    font-size: 300%;
+    text-align: center;
+    color: #fff;
+  }
+  .sideMenuOuterContainer {
+    display: block;
+    width: 15vw;
+    margin: 10vh 0 0 3vw;
+    padding-top: 5em;
+  }
+  .thumnNailContainer {
+    padding-top: 13vh;
+    width: 85vw;
+    display: flex;
+    justify-content: baseline;
+    // align-items: center;
+    flex-wrap: wrap;
+    margin: 1em;
+  }
+  .profileHeaderBlock {
+    display: none;
+  }
 }

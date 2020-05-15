@@ -26,9 +26,15 @@
   outline-width: 0;
 }
 .signinHelperText {
-  font-weight: 400
+  font-weight: 400;
 }
-.loginFormError{
+.loginFormError {
   color: red;
-  padding: 1% 0
+  padding: 1% 0;
+}
+.forgotPasswordText {
+  cursor: pointer;
+}
+.forgotPasswordText:hover {
+  color: red;
 }

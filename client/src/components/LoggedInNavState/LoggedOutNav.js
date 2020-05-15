@@ -1,15 +1,18 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
 import ReactTooltip from "react-tooltip";
 // Img
 import clipped from "../../assets/img/unClipped.png";
+import { modalOpen } from "../../store/actions/Index";
 
-const LoggedOutNav = props => {
+const LoggedOutNav = ({ modalOpen }) => {
   let location = useLocation();
   return (
     <Link
       data-tip
       data-for="clipTip"
+      onClick={() => modalOpen()}
       to={{ pathname: "/auth", state: { background: location } }}
       className="loginText"
     >
@@ -29,4 +32,7 @@ const LoggedOutNav = props => {
   );
 };
 
-export default LoggedOutNav;
+export default connect(
+  null,
+  { modalOpen }
+)(LoggedOutNav);

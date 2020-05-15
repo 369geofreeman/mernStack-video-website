@@ -1,25 +1,20 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 
-import { DUMMY_DATA_SFW as vids } from "../../assets/dummyData/videos";
 // Components
 import PrivateRoute from "../../navigation/PrivateRoute";
 import SideMenu from "../../components/ProfilePage/SideMenu/SideMenu";
+import SideMenuMobileView from "../../components/ProfilePage/SideMenuMobileView/SideMenuMobileView";
 import SavedVidsContainer from "../../components/ProfilePage/SavedVids/SavedVidsContainer";
 import Categories from "../../components/ProfilePage/Categories/Categories";
 import AccountSettings from "../../components/ProfilePage/AccountSettings/AccountSettings";
 import "./ProfilePage.scss";
 
-const ProfilePage = () => {
-  if (vids.length === 0) {
-    return (
-      <div className="profilePageContainer">
-        <SideMenu />
-        <div className="profilePagetext">Save vids to build a collection</div>
-      </div>
-    );
-  }
-  return (
+const ProfilePage = () => (
+  <>
+    <div className="profileHeaderBlock" />
+
+    <SideMenuMobileView />
     <div className="profilePageContainer">
       <div className="sideMenuOuterContainer">
         <SideMenu />
@@ -42,7 +37,7 @@ const ProfilePage = () => {
         />
       </Switch>
     </div>
-  );
-};
+  </>
+);
 
 export default ProfilePage;

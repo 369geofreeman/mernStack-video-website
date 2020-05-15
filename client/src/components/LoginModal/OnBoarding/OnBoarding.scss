@@ -8,9 +8,18 @@
 .onboardingText {
   font-weight: bold;
   font-size: 130%;
-  padding: 5% 0
+  padding: 5% 0;
 }
 .onboardingTextBody {
-  padding-Top: 3%
+  padding-top: 3%;
+}
 
+@media (max-width: 824px) {
+  @media (orientation: landscape) {
+  }
+  @media (orientation: portrait) {
+    .onboardingContainer {
+      padding: 0 2em 3em 2em;
+    }
+  }
 }

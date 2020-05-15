@@ -1,7 +1,5 @@
 .accountSettingsContainer {
-  text-align: center;
   margin: 3em 40em 5em 15em;
-  padding: 50px;
   background-color: #000;
   -webkit-animation: fadein 0.8s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 0.8s; /* Firefox < 16 */
@@ -44,95 +42,246 @@
     opacity: 1;
   }
 }
-
-
+.accountImgContainer {
+  text-align: center;
+}
 .AccountHeaderImg {
   width: 3em;
   height: 3em;
   align-items: center;
   margin-bottom: 1em;
 }
-.accountUserEmail { 
-  font-size: 2.5em; 
-  color: white; 
-  // text-align: 
-  margin-bottom: 1em
+.accountUserEmail {
+  font-size: 2.5em;
+  color: white;
+  // text-align:
+  margin-bottom: 1em;
+}
+.updatePasswordText {
+  color: silver;
+  padding-top: 5px;
 }
 
 .acountTitle {
   margin: 1em 0;
 }
-.accountFormChangeTitleContainer{
+.accountFormChangeTitleContainer {
   display: flex;
-  justify-content: space-between
 }
 .accountFormChangeTitleClose {
-  color: white;
+  color: red;
   cursor: pointer;
-  margin-right: 15px;
+  // margin-right: 15px;
+  float: right;
 }
-.accountTitleContainer{
+.accountTitleContainer {
   display: flex;
   justify-content: flex-start;
 }
-.accountSavedVidsText{
+.accountSavedVidsText {
   color: #f2f2f2;
   font-size: 1em;
   margin: 0.5em 1em 0.5em 0;
 }
-.accountSavedVidsTextRes{
+.accountSavedVidsTextRes {
   color: white;
   font-size: 1em;
   font-weight: bold;
   margin: 0.5em 1em 0.5em 0;
 }
 
-.accountChangeCredentualsContainer{
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2em;
-}
-.accountChangeBtn{
-  background-color: rgb(253, 13, 233);;
+.accountChangeBtn {
+  background-color: #f2f2f2;
   font-size: 1.5em;
-  color: white;
+  color: #333;
   padding: 7px 10px;
   border: 1px solid #333;
+  // margin-right: 2em;
   cursor: pointer;
   transition: 250ms ease-in-out;
-  border-radius: 10px;
+  border-radius: 5px;
 }
-.accountChangeBtn:hover{
-  transform: scaleX(1.1);
-  background-color: darkmagenta;
+.accountChangeBtn:hover {
+  transform: scaleX(1.05);
+  background-color: #f6f6f6;
 }
-.accountChangeBtn::after{
+.accountChangeBtn::after {
   transform: scale(1);
-  background-color: rgb(253, 13, 233);
+  background-color: #f2f2f2;
 }
 .accountChangeBtn:focus {
-  outline:none;
+  outline: none;
   box-shadow: none;
 }
-.accountFormChangeTitle{
- color: rgb(245, 49, 65);;
-  font-weight: 600
+.deleteAccountBtn {
+  background-color: #f2f2f2;
+  font-size: 1.5em;
+  color: #333;
+  padding: 7px 10px;
+  margin-top: 1em;
+  border: 1px solid #333;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.accountFormChangeTitle {
+  color: #f2f2f2;
+  font-weight: 600;
+  // margin-left: 1em;
+}
+.accountSpacer {
+  height: 4em;
 }
 
-.accountPasswordFormContainer{
+.accountPasswordFormContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .accountPasswordFormInput {
-  outline:none;
+  outline: none;
   width: 100%;
   margin: 1em 0;
   padding: 1em;
-  color: #222
+  color: #222;
 }
-.accountPasswordFormInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+.accountPasswordFormInput::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #333;
   opacity: 1; /* Firefox */
+}
+
+.openFormAccountContainer {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  @media (orientation: landscape) {
+    .accountSettingsContainer {
+      margin: 3em 0 0 0;
+    }
+    .accountTitleContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountBodyContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  @media (orientation: portrait) {
+    .accountUserEmail {
+      text-align: center;
+    }
+    .accountSettingsContainer {
+      margin: 3em 0 0 0;
+    }
+    .accountTitleContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountBodyContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  @media (orientation: landscape) {
+    .accountSettingsContainer {
+      margin: 3em 0 0 0;
+    }
+    .accountTitleContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountBodyContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  @media (orientation: portrait) {
+    .accountUserEmail {
+      text-align: center;
+    }
+    .accountSettingsContainer {
+      margin: 7em 0 0 0;
+    }
+    .accountTitleContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountBodyContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
+@media only screen and (min-width: 992px) {
+  @media (orientation: landscape) {
+    .accountSettingsContainer {
+      margin: 8em 0 0 0;
+      width: 80vw;
+    }
+    .accountUserEmail {
+      text-align: center;
+    }
+    .accountTitleContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountBodyContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountPasswordFormInput {
+      width: 70vw;
+    }
+    .openFormAccountContainer {
+      display: grid;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountPasswordFormContainer {
+      width: 30vw;
+    }
+    .accountPasswordFormInput {
+      width: 40vw;
+    }
+  }
+  @media (orientation: portrait) {
+    .accountUserEmail {
+      text-align: center;
+    }
+    .accountSettingsContainer {
+      margin: 3em 0 0 0;
+    }
+    .accountTitleContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .accountBodyContainer {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+  }
 }

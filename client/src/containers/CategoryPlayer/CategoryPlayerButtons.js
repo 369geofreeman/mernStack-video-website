@@ -2,33 +2,39 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Lottie from "react-lottie";
-import * as animationData from "../../assets/logos/lf20_XElJDo.json";
+import * as animationData from "../../assets/logos/logo-animated.json";
 // Components
-import ModalOpenBtn from "../../components/ModalOpenBtn/ModalOpenBtn";
+import ModalOpenBtn from "../../layout/ModalOpenBtn/ModalOpenBtn";
 import LoggedInNav from "../../components/LoggedInNavState/LoggedInNav";
 import LoggedOutNav from "../../components/LoggedInNavState/LoggedOutNav";
 import "./CategoryPlayer.scss";
 // Redux
 import { currentIndex } from "../../store/actions/Index";
 
-const CategoryPlayerButtons = props => {
+const CategoryPlayerButtons = ({
+  onResetCurrentIndex,
+  isLoggedIn,
+  previousIndex,
+  from,
+  nextIndex,
+  to,
+}) => {
   const defaultOptions = {
     loop: false,
-    // autoplay: true,
     animationData: animationData.default,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
-    }
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
 
   const resetIndex = () => {
-    props.onResetCurrentIndex(0);
+    onResetCurrentIndex(0);
   };
 
   return (
     <div>
       <div className="categoryPlayerLoggedInNavContainer">
-        {props.isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
+        {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
         <ModalOpenBtn />
       </div>
       <Link
@@ -37,19 +43,19 @@ const CategoryPlayerButtons = props => {
         style={{ zIndex: 2000 }}
         onClick={resetIndex}
       >
-        <Lottie options={defaultOptions} height={80} width={220} />
+        <Lottie options={defaultOptions} />
       </Link>
       <Link
-        onClick={props.previousIndex}
-        to={props.from}
+        onClick={previousIndex}
+        to={from}
         style={{ textDecoration: "none" }}
         className="savedVidsArrowsRight"
       >
         {"<"}
       </Link>
       <Link
-        onClick={props.nextIndex}
-        to={props.to}
+        onClick={nextIndex}
+        to={to}
         style={{ textDecoration: "none" }}
         className="savedVidsArrowsLeft"
       >
@@ -60,14 +66,14 @@ const CategoryPlayerButtons = props => {
 };
 
 // Redux
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.Authenticate.isAuthenticated
+    isLoggedIn: state.Authenticate.isAuthenticated,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onResetCurrentIndex: index => dispatch(currentIndex(index))
+    onResetCurrentIndex: (index) => dispatch(currentIndex(index)),
   };
 };
 

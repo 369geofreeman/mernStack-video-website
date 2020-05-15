@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, withRouter, useLocation } from "react-router-dom";
+import { connect } from "react-redux";
 import { useSpring, animated } from "react-spring";
 import ReactTooltip from "react-tooltip";
-// Imgs
+// Redux
+import { addSavedVid, loadUser, delSavedVid } from "../../store/actions/Index";
+// Icons
 import clipped from "../../assets/img/clipped.png";
 import unClipped from "../../assets/img/unClipped.png";
 import collection2 from "../../assets/img/pornFolderIcon.png";
 
 import "./LoggedInNav.scss";
 
-const LoggedInNav = () => {
+const LoggedInNav = ({
+  vidIndex,
+  categoryIndex,
+  currentVideos: { videos },
+  categoryVideos: { categoryVideos },
+  auth: { user },
+  addSavedVid,
+  delSavedVid
+}) => {
+  const location = useLocation();
+  const [savedVideos, setSavedVideos] = useState([]);
+  const [currentSavedVid, setCurrentSavedVid] = useState(0);
   const [liked, setLiked] = useState(false);
   const { x } = useSpring({
     from: { x: 0 },
@@ -17,11 +31,71 @@ const LoggedInNav = () => {
     config: { duration: 300 }
   });
 
-  const onLiked = () => {
-    setLiked(!liked);
+  useEffect(() => {
+    if (user) setSavedVideos(user.savedVids);
+  }, [setSavedVideos, user]);
+
+  // Check to see if video liked
+  useEffect(() => {
+    if (location.pathname.match("/categories/")) {
+      categoryVideos.length > 0 &&
+        savedVideos &&
+        savedVideos.length > 0 &&
+        savedVideos.map(vid => {
+          if (vid.vidLink === categoryVideos[categoryIndex].vidLink) {
+            setCurrentSavedVid(vid._id);
+            return setTimeout(() => setLiked(true), 50);
+          } else {
+            return setLiked(false);
+          }
+        });
+    } else {
+      videos.length > 0 &&
+        savedVideos &&
+        savedVideos.length > 0 &&
+        savedVideos.map(vid => {
+          if (vid.vidLink === videos[vidIndex].vidLink) {
+            setCurrentSavedVid(vid._id);
+            return setTimeout(() => setLiked(true), 50);
+          } else {
+            return setLiked(false);
+          }
+        });
+    }
+    return setLiked(false);
+  }, [
+    setLiked,
+    vidIndex,
+    videos,
+    savedVideos,
+    categoryIndex,
+    categoryVideos,
+    location.pathname
+  ]);
+
+  // Like / unlike video
+  const onLiked = async () => {
+    if (location.pathname.match("/categories/")) {
+      if (liked) {
+        await delSavedVid(currentSavedVid);
+        setLiked(!liked);
+      } else {
+        await addSavedVid(categoryVideos[categoryIndex]);
+        loadUser();
+        setLiked(!liked);
+      }
+    } else {
+      if (liked) {
+        await delSavedVid(currentSavedVid);
+        setLiked(!liked);
+      } else {
+        await addSavedVid(videos[vidIndex]);
+        loadUser();
+        setLiked(!liked);
+      }
+    }
   };
 
-  const location = useLocation();
   if (
     location.pathname.match("/profile") ||
     location.pathname.match("/saved")
@@ -91,4 +165,15 @@ const LoggedInNav = () => {
   }
 };
 
-export default withRouter(LoggedInNav);
+const mapStateToProps = state => ({
+  currentVideos: state.Videos,
+  auth: state.Authenticate,
+  vidIndex: state.VideoIndex.currentIndex,
+  categoryVideos: state.Videos,
+  categoryIndex: state.VideoIndex.categoryIndex
+});
+
+export default connect(
+  mapStateToProps,
+  { addSavedVid, loadUser, delSavedVid }
+)(withRouter(LoggedInNav));

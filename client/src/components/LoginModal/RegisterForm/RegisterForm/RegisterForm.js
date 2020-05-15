@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 // Redux
 import { register, createProfile } from "../../../../store/actions/Index";
 // Components
-import Alert from "../../../Alert/Alert";
+import Alert from "../../../../layout/Alert/Alert";
 import "./RegisterForm.scss";
 
 const RegisterForm = ({ register }) => {

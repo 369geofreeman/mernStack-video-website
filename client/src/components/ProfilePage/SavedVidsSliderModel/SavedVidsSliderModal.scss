@@ -1,15 +1,14 @@
-$LogoSize: 5em;
-
+$LogoSize: 35em;
 
 .userVidsModalContainer {
   height: 100%;
   width: 100%;
   position: fixed;
-  z-index: 1001
+  z-index: 1001;
 }
 
 // SavedVidsSlider
-.savedVidsSliderContainer{
+.savedVidsSliderContainer {
   height: 100%;
   width: 100%;
   position: fixed;
@@ -52,20 +51,20 @@ $LogoSize: 5em;
 }
 
 // Slider Btns
-.userModalLogo{
+.userModalLogo {
   position: absolute;
-  width: $LogoSize * 3;
-  height: $LogoSize;
+  width: $LogoSize * 0.45;
+  height: $LogoSize * 0.2;
   top: 2em;
-  left: 2em;
+  left: 3em;
   cursor: pointer;
   transition: all 0.2s ease-out;
 }
-.userModalLogo:hover{
-  transform: scaleX(1.1)
+.userModalLogo:hover {
+  transform: scaleX(1.05);
 }
-.userModalLogo::after{
-  transform: scale(1)
+.userModalLogo::after {
+  transform: scale(1);
 }
 .savedVidsArrowsRight {
   position: absolute;
@@ -79,11 +78,11 @@ $LogoSize: 5em;
   text-align: center;
   transition: all 0.25s ease-out;
 }
-.savedVidsArrowsRight:hover{
+.savedVidsArrowsRight:hover {
   transform: scaleY(1.7);
-  color: #fff
+  color: #fff;
 }
-.savedVidsArrowsRight::after{
+.savedVidsArrowsRight::after {
   transform: scaleY(1);
 }
 
@@ -99,26 +98,149 @@ $LogoSize: 5em;
   text-align: center;
   transition: all 0.25s ease-out;
 }
-.savedVidsArrowsLeft:hover{
-  transform: scaleY(1.7);;
-  color: #fff
+.savedVidsArrowsLeft:hover {
+  transform: scaleY(1.7);
+  color: #fff;
 }
-.savedVidsArrowsLeft::after{
+.savedVidsArrowsLeft::after {
   transform: scaleY(1);
 }
-.userModalCloseContainer{
+.userModalCloseContainer {
   position: absolute;
   top: 5%;
   right: 5%;
 }
-.userModalCloseBtn{
+.userModalCloseBtn {
   width: 3em;
   height: 3em;
   transition: all 0.2s ease-out;
 }
-.userModalCloseBtn:hover{
+.userModalCloseBtn:hover {
   transform: scale(1.1);
 }
-.userModalCloseBtn::after{
-  transform: scale(1)
+.userModalCloseBtn::after {
+  transform: scale(1);
+}
+
+@media only screen and (max-width: 600px) {
+  @media (orientation: landscape) {
+    .userModalLogo {
+      width: $LogoSize * 0.18;
+      height: ($LogoSize * 0.15) / 3;
+      top: 1em;
+      left: 1em;
+      transition: null;
+    }
+    .userModalCloseBtn {
+      width: 1.5em;
+      height: 1.5em;
+      transition: null;
+    }
+    .userModalCloseContainer {
+      top: 5%;
+      right: 5%;
+    }
+  }
+  @media (orientation: portrait) {
+    .userModalLogo {
+      width: $LogoSize * 0.18;
+      height: ($LogoSize * 0.13) / 3;
+      top: 1em;
+      left: 0.5em;
+      transition: null;
+    }
+    .userModalCloseBtn {
+      width: 1.5em;
+      height: 1.5em;
+      transition: null;
+    }
+    .userModalCloseContainer {
+      top: 3%;
+      right: 5%;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  @media (orientation: landscape) {
+    .userModalLogo {
+      width: $LogoSize * 0.2;
+      height: ($LogoSize * 0.13) / 3;
+      top: 1em;
+      left: 1em;
+      transition: null;
+    }
+    .userModalCloseBtn {
+      width: 1.5em;
+      height: 1.5em;
+      transition: null;
+    }
+    .userModalCloseContainer {
+      top: 5%;
+      right: 5%;
+    }
+  }
+  @media (orientation: portrait) {
+    .userModalLogo {
+      width: $LogoSize * 0.2;
+      height: ($LogoSize * 0.2) / 3;
+      top: 1em;
+      left: 0.5em;
+      transition: null;
+    }
+    .userModalCloseBtn {
+      width: 1.5em;
+      height: 1.5em;
+      transition: null;
+    }
+    .userModalCloseContainer {
+      top: 3%;
+      right: 5%;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  @media (orientation: landscape) {
+    .userModalLogo {
+      width: $LogoSize * 0.23;
+      height: ($LogoSize * 0.15) / 3;
+      top: 1em;
+      left: 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .userModalLogo {
+      width: $LogoSize * 0.35;
+      height: ($LogoSize * 0.23) / 3;
+      top: 1em;
+      left: 1.5em;
+    }
+  }
+}
+@media only screen and (min-width: 992px) {
+  @media (orientation: landscape) {
+    .userModalLogo {
+      width: $LogoSize * 0.28;
+      height: ($LogoSize * 0.2) / 3;
+      top: 1em;
+      left: 1em;
+    }
+  }
+  @media (orientation: portrait) {
+    .userModalLogo {
+      width: $LogoSize * 0.4;
+      height: ($LogoSize * 0.3) / 3;
+      top: 1em;
+      left: 0.5em;
+    }
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .userModalLogo {
+    width: $LogoSize * 0.4;
+    height: ($LogoSize * 0.3) / 3;
+    top: 1.5em;
+    left: 2em;
+  }
 }

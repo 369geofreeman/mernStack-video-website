@@ -1,28 +1,23 @@
 import React, { useRef } from "react";
 import Lottie from "react-lottie";
-import * as animationData from "../../assets/logos/lf20_XElJDo.json";
+import * as animationData from "../../assets/logos/logo-animated.json";
 
 import "./Logo.scss";
 
-const Logo = props => {
+const Logo = ({ resetIndex }) => {
   const animation = useRef(null);
 
   const defaultOptions = {
     loop: false,
     animationData: animationData.default,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice"
-    }
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
 
   return (
-    <div className="mainStyleLogo" onClick={props.resetIndex}>
-      <Lottie
-        options={defaultOptions}
-        height={120}
-        width={220}
-        ref={animation}
-      />
+    <div className="mainStyleLogo" onClick={resetIndex}>
+      <Lottie options={defaultOptions} ref={animation} />
     </div>
   );
 };

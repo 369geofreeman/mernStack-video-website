@@ -78,7 +78,8 @@ const SavedVidsSlider = ({
           config={{
             file: {
               attributes: {
-                controlsList: "nodownload"
+                controlsList: "nodownload",
+                disablepictureinpicture: "true"
               }
             }
           }}
@@ -104,6 +105,7 @@ const SavedVidsSlider = ({
         style={{ backgroundColor: "#000" }}
         buttons={false}
         selected={VideoIndex}
+        mobileTouch={false}
       >
         {slides}
       </AwesomeSlider>

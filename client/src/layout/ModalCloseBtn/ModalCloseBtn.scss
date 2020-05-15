@@ -1,0 +1,38 @@
+.closeBtnContainer {
+  position: absolute;
+  right: 8%;
+  top: 5%;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  z-index: 1000;
+}
+.closeBtnText {
+  font-size: 4em;
+  opacity: 1;
+  color: #fff;
+}
+.closeBtnText:hover {
+  opacity: 0.3;
+}
+
+@media (max-width: 824px) {
+  @media (orientation: landscape) {
+    .closeBtnContainer {
+      top: 1em;
+      right: 3em;
+    }
+    .closeBtnText {
+      font-size: 2.5em;
+    }
+  }
+  @media (orientation: portrait) {
+    .closeBtnContainer {
+      top: 1em;
+      right: 3em;
+    }
+    .closeBtnText {
+      font-size: 2.5em;
+    }
+  }
+}

@@ -7,7 +7,8 @@
   font-size: 1em;
   transition: all 0.2s ease-in-out;
   transform: scale(1);
-  z-index: 2000;
+  z-index: 9000;
+  /* padding: 3em; */
 }
 .categoryLinkTitle {
   padding-top: 10px;
@@ -15,13 +16,14 @@
   text-decoration: none;
   cursor: pointer;
   font-size: 1.3em;
-  z-index: 3000;
+  z-index: 10000;
+  padding: 2em 0;
 }
-.categoryLinkTitle:hover{
-  color: rgb(175, 2, 2)
+.categoryLinkTitle:hover {
+  color: rgb(175, 2, 2);
 }
 
-.categoryLinkTitleViewAll{
+.categoryLinkTitleViewAll {
   margin-top: 10px;
   color: rgb(219, 39, 39);
   text-decoration: none;
@@ -29,46 +31,149 @@
   font-size: 1.1em;
   z-index: 3000;
 }
-.categoryLinkTitleViewAll:hover{
-  color: rgb(175, 2, 2)
+.categoryLinkTitleViewAll:hover {
+  color: rgb(175, 2, 2);
 }
 
-@media (max-width: 824px) {
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
   @media (orientation: landscape) {
     .headerVideoTitle {
-      padding: 0;
-      font-size: 60%;
-      top: 8%;
-      left: 0.5%;
-      transition: none;
-      transform: none;
+      position: absolute;
+      top: 5em;
+      left: 0.5em;
+      font-size: 0.5em;
     }
-    .headerVideoTitleAfter {
-      padding: 0;
-      font-size: 60%;
-      top: 8%;
-      left: 0.5%;
-      transition: none;
-      transform: none;
+    .categoryLinkTitle {
+      font-size: 1.3em;
+    }
+    .categoryLinkTitleViewAll {
+      font-size: 1.3em;
     }
   }
-  
   @media (orientation: portrait) {
     .headerVideoTitle {
-      padding: 0;
-      font-size: 60%;
-      top: 5%;
-      left: 5%;
-      transition: none;
-      transform: none;
+      position: absolute;
+      top: 5em;
+      margin: 0;
+      font-size: 0.5em;
     }
-    .headerVideoTitleAfter {
-      padding: 0;
-      font-size: 60%;
-      top: 5%;
-      left: 5%;
-      transition: none;
-      transform: none;
+    .categoryLinkTitle {
+      font-size: 1.3em;
     }
+    .categoryLinkTitleViewAll {
+      font-size: 1.3em;
+    }
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  @media (orientation: landscape) {
+    .headerVideoTitle {
+      position: absolute;
+      top: 5.7em;
+      left: 0.5em;
+      font-size: 0.5em;
+    }
+    .categoryLinkTitle {
+      font-size: 1.3em;
+    }
+    .categoryLinkTitleViewAll {
+      font-size: 1.3em;
+    }
+  }
+  @media (orientation: portrait) {
+    .headerVideoTitle {
+      position: absolute;
+      top: 6em;
+      margin: 0;
+      font-size: 0.5em;
+    }
+    .categoryLinkTitle {
+      font-size: 1.3em;
+    }
+    .categoryLinkTitleViewAll {
+      font-size: 1.3em;
+    }
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  @media (orientation: landscape) {
+    .headerVideoTitle {
+      position: absolute;
+      top: 5em;
+      left: 0.3em;
+      font-size: 0.6em;
+    }
+    .categoryLinkTitle {
+      font-size: 1.3em;
+    }
+    .categoryLinkTitleViewAll {
+      font-size: 1.3em;
+    }
+  }
+  @media (orientation: portrait) {
+    .headerVideoTitle {
+      position: absolute;
+      top: 6em;
+      left: 4em;
+      margin: 0;
+      font-size: 0.6em;
+    }
+    .categoryLinkTitle {
+      font-size: 1.8em;
+    }
+    .categoryLinkTitleViewAll {
+      font-size: 1.8em;
+    }
+  }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  @media (orientation: landscape) {
+    .headerVideoTitle {
+      position: absolute;
+      top: 4.5em;
+      left: 0em;
+      font-size: 0.7em;
+    }
+    .categoryLinkTitle {
+      font-size: 1.3em;
+    }
+    .categoryLinkTitleViewAll {
+      font-size: 1.3em;
+    }
+  }
+  @media (orientation: portrait) {
+    .headerVideoTitle {
+      position: absolute;
+      top: 7.5em;
+      left: 3em;
+      margin: 0;
+      font-size: 0.6em;
+    }
+    .categoryLinkTitle {
+      font-size: 1.8em;
+    }
+    .categoryLinkTitleViewAll {
+      font-size: 1.8em;
+    }
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .headerVideoTitle {
+    position: absolute;
+    top: 7em;
+    left: 4em;
+    margin: 0;
+    font-size: 0.75em;
+  }
+  .categoryLinkTitle {
+    font-size: 1.8em;
+  }
+  .categoryLinkTitleViewAll {
+    font-size: 1.8em;
   }
 }
