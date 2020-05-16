@@ -1,12 +1,12 @@
 # Hooked (MERN application)
 
-A MERN application that fetches the latest nature and animal videos from multiple subreddits and displays them in a mobile first view with the abillity to login and save your favourites/build collections.
+A MERN application that fetches the latest nature and animal videos from multiple subreddits and displays them in a mobile first view. Login and save/build your own collections.
 Videos are automatically fetched and pushed into the database via node on a daily bases.
-This site was a project to further learn the MERN stack, databases and API's. It is not for profit.
+This application was a project to further learn the MERN stack, databases and API's. Not for profit.
 
 ## Why
 
-I built this to further learn more advanced features of modern web development and to gain a better understanding of server/database concepts and structures for a modern web application.
+I built this to further learn more advanced features of modern web development and to gain a better understanding of server/database concepts and structures.
 
 This includes:
 
