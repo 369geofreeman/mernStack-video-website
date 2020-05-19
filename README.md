@@ -1,8 +1,5 @@
 # Hooked (MERN application)
 
-### Demo:
-https://damp-mountain-68119.herokuapp.com/
-
 A MERN application that fetches the latest nature and animal videos from multiple subreddits and displays them in a mobile first view. Login and save/build your own collections.
 Videos are automatically fetched and pushed into the database via node on a daily bases.
 This application was a project to further learn the MERN stack, databases and API's. Not for profit.
